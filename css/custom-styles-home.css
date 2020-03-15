@@ -1,0 +1,38 @@
+body
+{
+
+}
+
+#main-jumbotron-home
+{
+	padding: 50px;
+
+	background-image: url(images/main-jumbotron-home-image.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+#news-accordion
+{
+	padding: 20px;
+}
+
+#news-head-text
+{
+	text-align: left;
+}
+
+#news-head-text:hover
+{
+	text-decoration: none;
+}
+
+#news-head-text:focus
+{
+	text-decoration: none;
+}
