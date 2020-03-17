@@ -24,10 +24,10 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="home.html"> Home <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="home.html"> About </a>
+	        <a class="nav-link" href="#"> About </a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#"> Contact </a>
@@ -35,10 +35,10 @@
 	    </ul>
 	    <ul class="navbar-nav ml-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="home.html"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+	        <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="home.html"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
+	        <a class="nav-link" href="#"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
 	      </li>
 	    </ul>
 
