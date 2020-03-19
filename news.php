@@ -98,11 +98,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
         <div class="modal-body">
           <div class="form-group">
             <label for="server_name">Server Name</label>
-            <input type="text" class="form-control" name="server_name" >
+            <input type="password" class="form-control" name="server_name" >
           </div>
           <div class="form-group">
             <label for="server_user_name">Server Username</label>
-            <input type="text" class="form-control" name="server_user_name">
+            <input type="password" class="form-control" name="server_user_name">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
           </div>
           <div class="form-group">
             <label for="database_name">Database Name</label>
-            <input type="text" class="form-control" name="database_name">
+            <input type="password" class="form-control" name="database_name">
           </div>
         </div>
 
