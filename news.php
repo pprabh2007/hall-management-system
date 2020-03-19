@@ -128,47 +128,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 
 <div class="accordion container" id="news-accordion">
  
+  <?php
+
+    include("db_connect.php");
+    $query = "SELECT * from general_news order by sr_no desc";
+    $run = mysqli_query($connection, $query);
+    while($result = mysqli_fetch_assoc($run))
+    {
+
+  ?>
+
   <div class="card">
-    <div class="card-header" id="news-head-1">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
-        <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-1" aria-expanded="true" aria-controls="news-1">
-          Notice about change of Halls
+    <div class="card-header" id="news-head-<?php echo $result['sr_no']; ?>">
+      <span class="btn" id="news-head-date"><?php echo $result['date']; ?></span>
+        <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-<?php echo $result['sr_no']; ?>" aria-expanded="true" aria-controls="news-<?php echo $result['sr_no']; ?>">
+          <?php echo $result['title']; ?>
         </button>
     </div>
-    <div id="news-1" class="collapse" aria-labelledby="news-head-1" data-parent="#news-accordion">
+    <div id="news-<?php echo $result['sr_no']; ?>" class="collapse" aria-labelledby="news-head-<?php echo $result['sr_no']; ?>" data-parent="#news-accordion">
       <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        <?php echo $result['content']; ?>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header" id="news-head-2">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
-        <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-2" aria-expanded="false" aria-controls="news-2">
-         Notice about allowance of girls in night canteens
-        </button>
-    </div>
-    <div id="news-2" class="collapse" aria-labelledby="news-head-2" data-parent="#news-accordion">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="news-head-3">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
-        <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-3" aria-expanded="false" aria-controls="news-3">
-          Notice about coronavirus epidemic
-        </button>
-    </div>
-    <div id="news-3" class="collapse" aria-labelledby="news-head-3" data-parent="#news-accordion">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
+  <?php } ?>
 
 </div>
 
