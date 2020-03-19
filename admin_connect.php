@@ -6,7 +6,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
   $temp_title = $_POST['title'];
   $temp_content = $_POST['content'];
   $query = "INSERT into general_news (date, title, content) VALUES (CURDATE(), '$temp_title', '$temp_content')";
-  echo $query;
+  //echo $query;
 
 
   include('db_connect.php');
@@ -15,11 +15,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 
   if($run_query)
   {
-    echo "YO";
+    echo '<script>alert("Published!")</script>'; 
   }
   else
   {
-    echo "NAY";
+    echo '<script>alert("Error!")</script>'; 
   }
 
   mysqli_close($connection);
