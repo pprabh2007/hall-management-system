@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> Log in
+<title> Student Register
 </title>
 </head>
 <body>
-<form>
+<form action="signup.php" method="POST">
 <br />Roll Number:<br />
-<input type="text" name="id" maxlength=10 /><br />
+<input type="text" name="id" maxlength=25 /><br />
 
 <br />Name:<br />
 <input type="text" name="name" maxlength=25 /><br />
@@ -58,7 +58,7 @@
 <input type="password" name="rpword" /><br />
 <div> </div>
 
-<br /><button type="submit" >Log in</button><br /><br />
+<br /><button type="submit" >Register</button><br /><br />
 <small>
 Already have an account? <a href="login.php" class="fLink">Log in</a>
 </small>

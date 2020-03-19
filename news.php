@@ -8,10 +8,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
   $database_name = $_POST['database_name'];
 
   $connection = @mysqli_connect($server_name, $server_user_name, $password, $database_name);
-  
+
 
   if($connection)
-  { 
+  {
 
     header('Location: admin_connect.php');
     exit;
@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
   else
   {
 
-    echo '<script>alert("Database Not Connected!")</script>'; 
+    echo '<script>alert("Database Not Connected!")</script>';
   }
 }
 ?>
@@ -35,13 +35,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
 	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/popper.js"></script> 
-	
+	<script type="text/javascript" src="js/popper.js"></script>
+
 </head>
 
 <body>
 
-	
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container">
 	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
@@ -63,10 +63,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 	    </ul>
 	    <ul class="navbar-nav ml-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
+	        <a class="nav-link" href="signup.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
 	      </li>
 	    </ul>
 
@@ -93,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
+
       <form id="server_login_form" action="news.php" method="post">
         <div class="modal-body">
           <div class="form-group">
@@ -127,10 +127,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 </div>
 
 <div class="accordion container" id="news-accordion">
- 
+
   <?php
 
-    include("db_connect.php");
+    require("db_connect.php");
     $query = "SELECT * from general_news order by sr_no desc";
     $run = mysqli_query($connection, $query);
     while($result = mysqli_fetch_assoc($run))
@@ -152,10 +152,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
     </div>
   </div>
 
-  <?php } ?>
+  <?php
+    }
+    mysqli_free_result($run);
+    mysqli_close($connection);
+  ?>
 
 </div>
 
 </body>
 </html>
-

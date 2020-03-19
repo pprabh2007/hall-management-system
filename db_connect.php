@@ -8,7 +8,6 @@ $database_name = 'hms';
 try
 {
 	$connection = mysqli_connect($server_name, $server_user_name, $password, $database_name);
-
 }
 catch(Exceptiom $e)
 {

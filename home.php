@@ -8,12 +8,12 @@
 	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/popper.js"></script>
-	
+
 </head>
 
 <body>
 
-	
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container">
 	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
@@ -35,10 +35,10 @@
 	    </ul>
 	    <ul class="navbar-nav ml-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
+	        <a class="nav-link" href="signup.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
 	      </li>
 	    </ul>
 
