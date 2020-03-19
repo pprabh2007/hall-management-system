@@ -2,121 +2,118 @@
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 {
-  $server_name = $_POST['server_name'];
-  $server_user_name = $_POST['server_user_name'];
-  $password = $_POST['password'];
-  $database_name = $_POST['database_name'];
 
-  $connection = @mysqli_connect($server_name, $server_user_name, $password, $database_name);
-  
+  $temp_title = $_POST['title'];
+  $temp_content = $_POST['content'];
+  $query = "INSERT into general_news (date, title, content) VALUES (CURDATE(), '$temp_title', '$temp_content')";
+  echo $query;
 
-  if($connection)
-  { 
 
-    header('Location: admin_connect.php');
-    exit;
+  include('db_connect.php');
+
+  $run_query = mysqli_query($connection, $query);
+
+  if($run_query)
+  {
+    echo "YO";
   }
   else
   {
-
-    echo '<script>alert("Database Not Connected!")</script>'; 
+    echo "NAY";
   }
+
+  mysqli_close($connection);
 }
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>News</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
-	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/popper.js"></script> 
-	
+  <title>News</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
+  <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/popper.js"></script> 
+  
 </head>
 
 <body>
 
-	
+  
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<div class="container">
-	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> About </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> Contact </a>
-	      </li>
-	    </ul>
-	    <ul class="navbar-nav ml-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
-	      </li>
-	    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> About </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> Contact </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
+        </li>
+      </ul>
 
 
-	  </div>
-	</div>
+    </div>
+  </div>
 </nav>
 
 <br>
 
 <div class = "container">
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#server_modal">
-  Edit
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_news_modal">
+  Add 
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="server_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add_news_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Admin Login</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Notice</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       
-      <form id="server_login_form" action="news.php" method="post">
+      <form id="add_news_form" action="admin_connect.php" method="post">
         <div class="modal-body">
           <div class="form-group">
-            <label for="server_name">Server Name</label>
-            <input type="text" class="form-control" name="server_name" >
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" >
           </div>
           <div class="form-group">
-            <label for="server_user_name">Server Username</label>
-            <input type="text" class="form-control" name="server_user_name">
+            <label for="content">Content</label>
+            <textarea class="form-control" name="content" rows="5  "></textarea>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password">
-          </div>
-          <div class="form-group">
-            <label for="database_name">Database Name</label>
-            <input type="text" class="form-control" name="database_name">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" onchange="document.getElementById('submit').disabled = !this.checked;">
+            <label class="form-check-label" for="confirm">I understand that I will not be able to delete this information later</label>
           </div>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+          <button type="submit" id="submit" disabled="true" class="btn btn-primary" name="submit">Publish</button>
         </div>
       </form>
 
@@ -130,7 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
  
   <div class="card">
     <div class="card-header" id="news-head-1">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
+      <span class="btn" id="news-head-date">24/02/2017</span>
         <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-1" aria-expanded="true" aria-controls="news-1">
           Notice about change of Halls
         </button>
@@ -144,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 
   <div class="card">
     <div class="card-header" id="news-head-2">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
+      <span class="btn" id="news-head-date">24/02/2017</span>
         <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-2" aria-expanded="false" aria-controls="news-2">
          Notice about allowance of girls in night canteens
         </button>
@@ -158,7 +155,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 
   <div class="card">
     <div class="card-header" id="news-head-3">
-    	<span class="btn" id="news-head-date">24/02/2017</span>
+      <span class="btn" id="news-head-date">24/02/2017</span>
         <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-3" aria-expanded="false" aria-controls="news-3">
           Notice about coronavirus epidemic
         </button>
@@ -174,4 +171,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 
 </body>
 </html>
-
