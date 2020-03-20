@@ -1,66 +1,72 @@
 <?php
-	
-	if(isset($_POST['submit'])){
+	if(isset($_POST['submit']))
+	{
 		require('db_connect.php');
-		if($_POST['reg-password']===$_POST['reg-confirm-password']){
+		if($_POST['reg-password'] === $_POST['reg-confirm-password'])
+		{
 			$login_id = $_POST['reg-roll-no'];
 			$login_cat = $_POST['reg-category'];
 			$login_pword = $_POST['reg-password'];
 			$sql = "INSERT INTO login_credentials(login_id,login_category,login_password) VALUES('$login_id','$login_cat','$login_pword')";
-			if(mysqli_query($conn,$sql)){
+			if(mysqli_query($connection,$sql))
+			{
 			}
 			else{
-				echo 'query error: '.mysqli_error($conn);
+				echo 'query error: '.mysqli_error($connection);
 			}
 			$name=$_POST['reg-name'];
 			$hall=$_POST['reg-hall'];
 			$email=$_POST['reg-email'];
-			if($_POST['reg-category']==='Boarder'){
+			if($_POST['reg-category']==='Boarder')
+			{
 				$dob=$_POST['reg-dob'];
 				$dept=$_POST['reg-branch'];
-			
 				$sql="INSERT INTO student_data(roll_no,name,branch_code,date_of_birth,email_id,hall_code) VALUES('$login_id','$name','$dept','$dob','$email','$hall')";
-
-				if(mysqli_query($conn,$sql)){
+				if(mysqli_query($connection,$sql))
+				{
 				}
 				else{
-					echo 'query error: '.mysqli_error($conn);	
+					echo 'query error: '.mysqli_error($connection);
 				}
-				
 			}
-			else if($_POST['reg-category']==='Warden'){
-				//$pos=$_POST['reg-position'];
-				$pos="Assistant";
-				//$dop=$_POST['reg-dop'];
-				$dop="1970-10-9";
-				$sql="INSERT INTO hall_authorities(employee_id,name,position,date_of_appointment,email_id,hall_code) VALUES('$login_id','$name','$pos','$dop','$email','$hall')";
+			else if($_POST['reg-category']==='Warden')
+			{
+				$pos=$_POST['reg-position'];
+				$doa=$_POST['reg-doa'];
+				$sql="INSERT INTO hall_authorities(employee_id,name,position,date_of_appointment,email_id,hall_code) VALUES('$login_id','$name','$pos','$doa','$email','$hall')";
 
-				if(mysqli_query($conn,$sql)){
+				if(mysqli_query($connection,$sql)){
 				}
 				else{
-					
+					echo 'query error: '.mysqli_error($connection);
 				}
-			
 			}
-			else if($_POST['reg-category']==='Council'){
+			else if($_POST['reg-category']==='Hall Council Member')
+			{
 				$dob=$_POST['reg-dob'];
 				$dept=$_POST['reg-branch'];
 				$post=$_POST['reg-portfolio'];
 
 				$sql="INSERT INTO student_data(roll_no,name,branch_code,date_of_birth,email_id,hall_code) VALUES('$login_id','$name','$dept','$dob','$email','$hall')";
 
-				mysqli_query($conn,$sql);
-
-				$sql="INSERT INTO hall_council(roll_no,position,hall_code) VALUES('$login_id','$post','$hall')";
-
-				if(mysqli_query($conn,$sql)){
-					
+				if(mysqli_query($connection,$sql)){
 				}
 				else{
-					echo 'query error: '.mysqli_error($conn);	
+					echo 'query error: '.mysqli_error($connection);
+				}
+
+				$sql="INSERT INTO hall_council(roll_no,portfolio,hall_code) VALUES('$login_id','$post','$hall')";
+
+				if(mysqli_query($connection,$sql)){
+				}
+				else{
+					echo 'query error: '.mysqli_error($connection);
 				}
 
 			}
+		}
+		else {
+				echo '<script>alert("Passwords donot match !!")</script>';
 		}
 	}
 ?>
@@ -82,14 +88,29 @@
 	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/popper.js"></script>
-	
+
 	<script>
+		var today = new Date();
+		window.onload = function()
+		{
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			if(dd < 10)
+				dd = '0'+dd;
+			if(mm<10)
+				mm = '0'+mm;
+			today = yyyy+'-'+mm+'-'+dd;
+			document.getElementById('reg-category').selectedIndex = "0";
+		}
 		function getOptions()
 		{
 			var cat = document.getElementById('reg-category').value;
 			if(cat=='Boarder')
 			{
 				document.getElementById('reg-portfolio-div').style.display = 'none';
+				document.getElementById('reg-position-div').style.display = 'none';
+				document.getElementById('reg-doa-div').style.display = 'none';
 				document.getElementById('reg-branch-div').style.display = 'block';
 				document.getElementById('reg-dob-div').style.display = 'block';
 			}
@@ -98,19 +119,24 @@
 				document.getElementById('reg-portfolio-div').style.display = 'none';
 				document.getElementById('reg-branch-div').style.display = 'none';
 				document.getElementById('reg-dob-div').style.display = 'none';
-				document.getElementById('reg-warden-div').style.display = 'none';
+				document.getElementById('reg-position-div').style.display = 'block';
+				document.getElementById('reg-doa-div').style.display = 'block';
+				document.getElementById("reg-doa").setAttribute("max", today);
 			}
 			else
 			{
+				document.getElementById('reg-position-div').style.display = 'none';
+				document.getElementById('reg-doa-div').style.display = 'none';
 				document.getElementById('reg-portfolio-div').style.display = 'block';
 				document.getElementById('reg-branch-div').style.display = 'block';
 				document.getElementById('reg-dob-div').style.display = 'block';
 			}
 		}
+
 	</script>
 </head>
 <body>
-	
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container">
 	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
@@ -161,21 +187,25 @@
     <select class="form-control" id="reg-hall" name="reg-hall">
     <option>RP</option>
     <option>RK</option>
+		<option>LBS</option>
+    <option>AZ</option>
+		<option>NH</option>
+    <option>BRH</option>
     </select>
   </div>
- 
   <div class="form-group">
-  <label for="reg-roll-no">Roll Number or Employment ID</label>
-  <input type="text" class="form-control" id="reg-roll-no" name="reg-roll-no" required="required">
+  	<label for="reg-roll-no">Roll Number or Employment ID</label>
+  	<input type="text" class="form-control" id="reg-roll-no" name="reg-roll-no" required="required">
   </div>
   <div class="form-group">
 	  <label for="reg-category">Category</label>
 	  <select class="form-control" id="reg-category" name="reg-category" onchange="getOptions()" >
 	  <option>Boarder</option>
-	  <option>Council</option>
+	  <option>Hall Council Member</option>
 	  <option>Warden</option>
 	  </select>
   </div>
+	<!-- HCM -->
   <div class="form-group" id="reg-portfolio-div" style="display: none">
 	  <label for="reg-portfolio">Portfolio</label>
 	  <select class="form-control" id="reg-portfolio" name="reg-portfolio">
@@ -184,21 +214,11 @@
 	  <option>Welfare</option>
 	  </select>
   </div>
-
-<div class="form-group" id="reg-warden-div" style="display: none">
-	  <label for="reg-warden">Portfolio</label>
-	  <select class="form-control" id="reg-warden" name="reg-warden">
-	  <option>Chief</option>
-	  <option>Deputy</option>
-	  <option>Assistant</option>
-	  </select>
-  </div>
-
+	<!-- Border and HCM -->
   <div class="form-group" id="reg-dob-div">
     <label for="reg-dob">Date of Birth</label>
     <input type="date" class="form-control" id="reg-dob" name="reg-dob" min="1990-01-01" max="2010-12-31" >
   </div>
-  
   <div  class="form-group" id="reg-branch-div">
 	  <label for="reg-branch">Branch</label>
 	  <select class="form-control" id="reg-branch" name="reg-branch">
@@ -224,18 +244,30 @@
 	  <option value="PH">Physics</option>
 	  </select>
   </div>
+	<!-- Warden -->
+	<div class="form-group" id="reg-position-div" style="display: none">
+	  <label for="reg-position-div">Position</label>
+	  <select class="form-control" id="reg-position" name="reg-position">
+	  <option>Chief</option>
+	  <option>Deputy</option>
+	  <option>Assistant</option>
+	  </select>
+  </div>
+	<div class="form-group" id="reg-doa-div" style="display: none">
+    <label for="reg-doa">Date of Appointment</label>
+    <input type="date" class="form-control" id="reg-doa" name="reg-doa" min="1990-01-01" >
+  </div>
   <br>
   <div>
 		<input type="submit" name="submit" value="Register">
 	</div>
   <small style="padding-left: 20px">
-	Already have an account? <a href="login.php" >Log In</a>
+Already have an account? <a href="login.php" >Log In</a>
   </small>
   <br>
   <br>
   <br>
   <br>
-  
 </form>
 </div>
 </body>
