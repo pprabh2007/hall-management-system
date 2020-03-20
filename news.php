@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="register.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
+	        <a class="nav-link" href="signup.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
 	      </li>
 	    </ul>
 
