@@ -62,7 +62,7 @@
 	    </ul>
 	    <ul class="navbar-nav ml-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
 	      </li>
 	    </ul>
 
