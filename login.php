@@ -66,7 +66,7 @@
 </form>
 
 <small>
-<br/>Don't have an account? <a href="signup.php" class="fLink">Sign up</a>
+<br/>Don't have an account? <a href="register.php" class="fLink">Sign up</a>
 </small>
 </body>
 </html>
