@@ -13,9 +13,9 @@
 	<input type="text" name="id"/><br/><br/>
 	<label>Type:</label><br/>
 	<select type="text" name="category"/>
-		<option value="STUDENT">Student</option>
-		<option value="HCM">Hall Council Member</option>
-		<option value="WARDEN">Warden</option>
+		<option>Boarder</option>
+		<option>Hall Council Member</option>
+		<option>Warden</option>
 	</select>
 	<br/><br/>
 	<label>Password:</label><br/>
@@ -33,29 +33,40 @@
 					'\' AND login_category=\''.$_POST['category'].'\'';
 
 					//make query and post result
-					$result = mysqli_query($connection, $sql);
+					$run = mysqli_query($connection, $sql);
 
 					//fetch the resulting rows as an associated array
-					$records = mysqli_fetch_all($result,MYSQLI_ASSOC);
+					$result = mysqli_fetch_all($run,MYSQLI_ASSOC);
 
 					//free result from memory
-					mysqli_free_result($result);
+					mysqli_free_result($run);
 
-					//close connection
-					mysqli_close($connection);
 
-					if(count($records)==0)
+					if(count($result)==0)
 					{
 						echo 'Invalid ID/password';
+						//close connection
+						mysqli_close($connection);
 					}
 					else
 					{
-						echo 'Success';
+						if ($_POST['category'] == 'Warden')
+						{
+							$sql = 'SELECT hall_code from hall_authorities WHERE employee_id = "'.$_POST['id'].'";';
+						}
+						else
+						{
+							$sql = 'SELECT * FROM student_data WHERE student_data.roll_no = "'.$_POST['id'].'";';
+						}
+						$run = mysqli_query($connection, $sql);
+						$result = mysqli_fetch_assoc($run);
+						session_start();
+						$_SESSION['id'] = $_POST['id'];
+						$_SESSION['type'] = $_POST['category'];
+						$_SESSION['hall_code'] = $result['hall_code'];
+						mysqli_close($connection);
+						header('Location: complaints.php');
 					}
-				}
-				else
-				{
-					echo 'All fields are mandatory.';
 				}
 			}
 		?>
