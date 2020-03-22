@@ -65,7 +65,7 @@
 						$_SESSION['type'] = $_POST['category'];
 						$_SESSION['hall_code'] = $result['hall_code'];
 						mysqli_close($connection);
-						header('Location: complaints.php');
+						header('Location: hall_news.php');
 					}
 				}
 			}
