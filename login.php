@@ -40,7 +40,7 @@
 			$_SESSION['type'] = $_POST['category'];
 			$_SESSION['hall_code'] = $result['hall_code'];
 			mysqli_close($connection);
-			header('Location: hall_news.php');
+			header('Location: student_page.php');
 		}
 	}
 ?>
@@ -103,12 +103,13 @@
     <input type="password" class="form-control" id="password" name="password" required="required">
   </div>
   <br>
-  <div>
-		<input type="submit" name="submit" value="Sign in">
-	</div>
-  <small style="padding-left: 20px">
-Don't have an account? <a href="register.php" >Register</a>
-  </small>
+  <div >
+		<input class="btn btn-primary" type="submit" name="submit" value="Sign in">
+	
+	<small style="padding-left: 20px">
+	Already have an account? <a href="login.php" >Log In</a>
+  	</small>	
+  </div>
   <br>
   <br>
   <br>

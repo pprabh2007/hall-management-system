@@ -1,0 +1,54 @@
+#main-div
+{
+	height: 100%;
+	margin-top: 1rem;
+	padding-left: 0;
+}
+
+#option-bar
+{
+	height: 100%;
+	background-color: #343a40;
+	padding-top: 2rem;
+	padding-left: 1rem;
+}
+
+.option-bar-list
+{
+
+}
+
+.option-bar-list li
+{
+	margin: 0.7rem;
+	padding: 0.2rem;
+}
+
+.option-bar-list button
+{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1rem;
+	font-weight: normal;
+	color: rgb(255, 255, 255, 0.5);
+}
+
+.option-bar-list button:hover
+{
+	text-decoration: none;
+	color: rgb(255, 255, 255, 0.8);
+}
+
+.option-bar-list button:focus
+{
+	text-decoration: none;
+	color: rgb(255, 255, 255, 0.8);
+	outline: none;
+}
+
+#page-body
+{
+	text-align: left;
+	height: 100%;
+	width: 100%;
+	outline: none;
+}

@@ -62,10 +62,10 @@ if($type != 'Boarder' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['s
 <!DOCTYPE html>
 <html>
 <head>
-	<title>News</title>
+
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
+  <link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
 	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/popper.js"></script>
@@ -75,45 +75,12 @@ if($type != 'Boarder' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['s
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<div class="container">
-	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> About </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> Contact </a>
-	      </li>
-	    </ul>
-	    <ul class="navbar-nav ml-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="register.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
-	      </li>
-	    </ul>
-
-
-	  </div>
-	</div>
-</nav>
-
 <br>
 <?php
 if ($type != 'Boarder')
 {
 ?>
-<div class = "container">
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#server_modal">
   Edit
@@ -152,11 +119,10 @@ if ($type != 'Boarder')
   </div>
 </div>
 
-</div>
 <?php
 }
 ?>
-<div class="accordion container" id="news-accordion">
+<div class="accordion" id="news-accordion">
 
   <?php
 
