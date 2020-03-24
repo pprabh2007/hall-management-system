@@ -28,70 +28,14 @@ if($type != "Warden" && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['su
   }
   mysqli_close($connection);
 }
-?>
 
-
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Complaints</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
-	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/popper.js"></script>
-
-</head>
-
-<body>
-
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<div class="container">
-	  <a class="navbar-brand" href="#"><i class="fa fa-university" aria-hidden="true"></i></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> About </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"> Contact </a>
-	      </li>
-	    </ul>
-	    <ul class="navbar-nav ml-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="register.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
-	      </li>
-	    </ul>
-
-
-	  </div>
-	</div>
-</nav>
-
-<br>
-<?php
 if ($type != "Warden")
 {
 ?>
 <div class = "container">
-
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#server_modal">
   Register a Complaint
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="server_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -102,7 +46,6 @@ if ($type != "Warden")
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <form id="server_login_form" action="complaints.php" method="post">
         <div class="modal-body">
           <div class="form-group">
@@ -129,7 +72,6 @@ if ($type != "Warden")
           <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         </div>
       </form>
-
     </div>
   </div>
 </div>
@@ -138,7 +80,6 @@ if ($type != "Warden")
 <?php
 }
 ?>
-
 <div class="accordion container" id="news-accordion">
 
   <?php
@@ -150,7 +91,6 @@ if ($type != "Warden")
     {
 
   ?>
-
   <div class="card">
     <div class="card-header" id="news-head-<?php echo $result['complaint_no']; ?>">
       <span class="btn" id="news-head-date"><?php echo $result['date']; ?></span>
@@ -164,14 +104,9 @@ if ($type != "Warden")
       </div>
     </div>
   </div>
-
   <?php
     }
     mysqli_free_result($run);
     mysqli_close($connection);
   ?>
-
 </div>
-
-</body>
-</html>
