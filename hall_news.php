@@ -55,28 +55,6 @@ if($type != 'Boarder' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['s
   mysqli_close($connection);
 }
 
-?>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
-  <link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
-	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/popper.js"></script>
-
-</head>
-
-<body>
-
-
-<br>
-<?php
 if ($type != 'Boarder')
 {
 ?>
@@ -156,6 +134,3 @@ if ($type != 'Boarder')
   ?>
 
 </div>
-
-</body>
-</html>
