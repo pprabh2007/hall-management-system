@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['id']) || !isset($_SESSION['type']) || !isset($_SESSION['hall_code']))
+  header('Location: home.php');
+
+$id = $_SESSION['id'];
+$type = $_SESSION['type'];
+$hall_code = $_SESSION['hall_code'];
+
+?>
+
 <!DOCTYPE html>
 <html style="height: 100%">
 <head>
@@ -17,18 +28,40 @@
 			document.getElementById('hall-news-cover-div').style.display = 'block';
 			document.getElementById('hall-about-cover-div').style.display = 'none';
 			document.getElementById('hall-complaints-cover-div').style.display = 'none';
+			document.getElementById('hall-contacts-cover-div').style.display = 'none';
+			document.getElementById('hall-status-cover-div').style.display = 'none';
 		}
 		function loadHallAbout()
 		{
 			document.getElementById('hall-news-cover-div').style.display = 'none';
 			document.getElementById('hall-complaints-cover-div').style.display = 'none';
 			document.getElementById('hall-about-cover-div').style.display = 'block';
+			document.getElementById('hall-contacts-cover-div').style.display = 'none';
+			document.getElementById('hall-status-cover-div').style.display = 'none';
 		}
 		function loadHallComplaints()
 		{
 			document.getElementById('hall-news-cover-div').style.display = 'none';
 			document.getElementById('hall-about-cover-div').style.display = 'none';
+			document.getElementById('hall-contacts-cover-div').style.display = 'none';
 			document.getElementById('hall-complaints-cover-div').style.display = 'block';
+			document.getElementById('hall-status-cover-div').style.display = 'none';
+		}
+		function loadHallContacts()
+		{
+			document.getElementById('hall-news-cover-div').style.display = 'none';
+			document.getElementById('hall-about-cover-div').style.display = 'none';
+			document.getElementById('hall-contacts-cover-div').style.display = 'block';
+			document.getElementById('hall-complaints-cover-div').style.display = 'none';
+			document.getElementById('hall-status-cover-div').style.display = 'none';
+		}
+		function loadStatusForm()
+		{
+			document.getElementById('hall-news-cover-div').style.display = 'none';
+			document.getElementById('hall-about-cover-div').style.display = 'none';
+			document.getElementById('hall-status-cover-div').style.display = 'block';
+			document.getElementById('hall-complaints-cover-div').style.display = 'none';
+			document.getElementById('hall-contacts-cover-div').style.display = 'none';
 		}
 
 	</script>
@@ -84,11 +117,11 @@
 					View Complaints
 				</button>
 				<br>
-				<button class="btn btn-link" onclick="loadHallNews()">
+				<button class="btn btn-link" onclick="loadStatusForm()">
 					Check Status
 				</button>
 				<br>
-				<button class="btn btn-link" onclick="loadHallNews()">
+				<button class="btn btn-link" onclick="loadHallContacts()">
 					Useful Contacts
 				</button>
 			</ul>
@@ -98,14 +131,6 @@
 	<div class="col-lg-10 col-sm-9 justify-content-left" id="page-body">
 		<div id="hall-news-cover-div" style="display: none;">
 				<?php
-				session_start();
-				if (!isset($_SESSION['id']) || !isset($_SESSION['type']) || !isset($_SESSION['hall_code']))
-				  header('Location: home.php');
-
-				$id = $_SESSION['id'];
-				$type = $_SESSION['type'];
-				$hall_code = $_SESSION['hall_code'];
-
 				if ($type == 'Warden')
 				{
 				  require('db_connect.php');
@@ -232,10 +257,6 @@
 
 		<div id="hall-complaints-cover-div" style="display: none;">
 				<?php
-	
-				$id = $_SESSION['id'];
-				$type = $_SESSION['type'];
-				$hall_code = $_SESSION['hall_code'];
 
 				if($type != "Warden" && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) )
 				{
@@ -341,7 +362,14 @@
 				  ?>
 				</div>
 		</div>
+		<div id="hall-contacts-cover-div" style="display: none;">
 
+			Hello Contacts
+		</div>
+		<div id="hall-status-cover-div" style="display: none;">
+			
+			Hello Status
+		</div>
 	</div>
 </div>
 
