@@ -183,6 +183,26 @@
 				document.getElementById('minus').style.display='none';
 			}
 		}
+
+		function checkPass()
+		{
+			
+			var p1 = document.getElementById('reg-password').value;
+			var p2 = document.getElementById('reg-confirm-password').value;
+
+			if(p1.length==0 || p2.length==0)
+			{
+			}
+			else if (p1===p2)
+			{
+				document.getElementById('form-submit').disabled=false;
+			}
+			else
+			{
+				document.getElementById('form-submit').disabled=true;
+				document.getElementById('form-submit').title="Passwords do not match!";
+			}
+		}
 		
 
 	</script>
@@ -228,11 +248,11 @@
   </div>
   <div class="form-group">
     <label for="reg-password">Password</label>
-    <input type="password" class="form-control" id="reg-password" name="reg-password" required="required">
+    <input type="password" class="form-control" id="reg-password" onblur="checkPass()" name="reg-password" required="required">
   </div>
   <div class="form-group">
     <label for="reg-confirm-password">Confirm Password</label>
-    <input type="password" class="form-control" id="reg-confirm-password" name="reg-confirm-password" required="required">
+    <input type="password" class="form-control" id="reg-confirm-password" onblur="checkPass()" name="reg-confirm-password" required="required">
   </div>
   <div class="form-group">
     <label for="reg-hall">Hall of Residence</label>
@@ -283,7 +303,7 @@
 	<!-- Border and HCM -->
   <div class="form-group" id="reg-dob-div">
     <label for="reg-dob">Date of Birth</label>
-    <input type="date" class="form-control" id="reg-dob" name="reg-dob" min="1990-01-01" max="2010-12-31" >
+    <input type="date" class="form-control" id="reg-dob" name="reg-dob" min="1990-01-01" max="2010-12-31" value="1990-01-01">
   </div>
   <div  class="form-group" id="reg-branch-div">
 	  <label for="reg-branch">Branch</label>
@@ -318,17 +338,17 @@
 	  <option>Deputy</option>
 	  <option>Assistant</option>
 	  </select>
-  </div>
+    </div>
 	<div class="form-group" id="reg-doa-div" style="display: none">
-    <label for="reg-doa">Date of Appointment</label>
-    <input type="date" class="form-control" id="reg-doa" name="reg-doa" min="1990-01-01" >
-  </div>
-  <br>
-  <div>
-		<input type="submit" name="submit" value="Register">
+	    <label for="reg-doa">Date of Appointment</label>
+	    <input type="date" class="form-control" id="reg-doa" name="reg-doa" min="1990-01-01" value="1990-01-01">
+    </div>
+  	<br>
+    <div>
+		<input class="btn btn-primary" title="" id="form-submit" type="submit" name="submit" value="Register">
+		<small class="btn" style="padding-left: 1.5rem">Already have an account? <a href="login.php" >Log In</a>
 	</div>
-  <small style="padding-left: 20px">
-Already have an account? <a href="login.php" >Log In</a>
+  
   </small>
   <br>
   <br>
