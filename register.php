@@ -1,4 +1,4 @@
-<?php
+ <?php
 	if(isset($_POST['submit']))
 	{
 		require('db_connect.php');
@@ -64,6 +64,17 @@
 				}
 
 			}
+
+			$i = 0;
+			while(isset($_POST[strval($i)]))
+			{
+				$number_i=$_POST[strval($i)];
+				$sql = "INSERT INTO contact_details(login_id, phone_number) VALUES('$login_id', '$number_i')";
+				mysqli_query($connection,$sql);
+				$i = $i + 1;
+			}
+
+    		mysqli_close($connection);
 		}
 		else {
 				echo '<script>alert("Passwords donot match !!")</script>';
@@ -91,6 +102,7 @@
 
 	<script>
 		var today = new Date();
+		var i = 0;
 		window.onload = function()
 		{
 			var dd = today.getDate();
@@ -132,6 +144,46 @@
 				document.getElementById('reg-dob-div').style.display = 'block';
 			}
 		}
+		function val_change()
+		{
+			add_elem = document.getElementById('add');
+			if(document.getElementById(i).value.length==0)
+			{
+				add_elem.disabled=true;
+			}
+			else
+			{
+				add_elem.disabled=false;
+			}
+		}
+		function addAnother()
+		{
+			i++;
+			var temp = document.getElementsByClassName('phone-number')[0].cloneNode();
+			temp.id = i;
+			temp.name = i;
+			temp.value='';
+			document.getElementById('phone-number-fields').appendChild(temp);
+			document.getElementById('add').disabled=true;
+			if(i>0)
+			{
+				document.getElementById('minus').disabled = false;
+				document.getElementById('minus').style.display = 'block';
+			}
+		}
+
+		function deleteLast()
+		{
+			document.getElementById(i).remove();
+			i--;
+
+			if(i==0)
+			{
+				document.getElementById('minus').disabled = true;
+				document.getElementById('minus').style.display='none';
+			}
+		}
+		
 
 	</script>
 </head>
@@ -197,6 +249,20 @@
   	<label for="reg-roll-no">Roll Number or Employment ID</label>
   	<input type="text" class="form-control" id="reg-roll-no" name="reg-roll-no" required="required">
   </div>
+  
+  <div class="form-group" id="phone-numbers">
+  	<label for="0">Phone Number(s)</label>
+  	<div class="row align-items-end">
+  		<div class="col-10" id="phone-number-fields">
+  			<input type="text" class="form-control phone-number" value="" onkeypress="val_change()" onblur="val_change()" id="0" name="0" required="required">
+  		</div>
+  		<div class="col-2">
+  			<button type="button" class="btn btn-link" id="minus" onclick="deleteLast()"><i class="fa fa-minus fa-lg"></i></button>
+  		</div>
+  	</div>
+  	<button type="button" class="btn btn-success" disabled id="add" onclick="addAnother()">Add Another</button>
+  </div>
+
   <div class="form-group">
 	  <label for="reg-category">Category</label>
 	  <select class="form-control" id="reg-category" name="reg-category" onchange="getOptions()" >

@@ -1,6 +1,18 @@
-body
+#add
 {
+	margin-top: 0.5rem;
+}
+#minus
+{
+	color: red;
+	padding-bottom: 0.3rem;
+	padding-left: 0rem;
+	display: none;
+}
 
+.phone-number
+{
+	margin-top: 0.5rem;
 }
 
 #main-jumbotron-home
