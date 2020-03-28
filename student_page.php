@@ -260,34 +260,111 @@ $hall_code = $_SESSION['hall_code'];
 
 
     		<div id="hall-contacts-cover-div" style="display: none;">
+            <?php
+                require("db_connect.php");
+                $query = "SELECT employee_id, name, position, email_id from hall_authorities WHERE hall_code = '$hall_code'";
+                $run = mysqli_query($connection, $query);
+                $new_row = true;
+                while($result = mysqli_fetch_assoc($run))
+                {
+                  
+            ?>
+
+            <?php
+            if($new_row){
+            ?>
             <div class="row">
+            <?php } ?>
+
                 <div class="col-md-4">
             			<div class="card" >
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <h5 class="card-title"><?php echo $result['name']; ?></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['position']." Warden"; ?></h6>
 
                       <br>
-                      <p class="card-text card-label">Contact: </p>
-                      <p class="card-text card-label">Email ID: </p>
+                      <span class="card-text card-label">Phone Number(s): </span>| 
+                      <?php
+                          $temp = $result['employee_id'];
+                          $subquery = "SELECT phone_number from contact_details where login_id='$temp'";
+                          $subrun = mysqli_query($connection, $subquery);
+                          while($subresult = mysqli_fetch_assoc($subrun))
+                          {
+                            echo $subresult['phone_number']." | ";
+                          }
+                      ?>
+                      <br>
+                      <span class="card-text card-label" >Email ID: </span><?php echo $result['email_id']; ?>
                     </div>
                   </div>
                 </div>
+
+            <?php
+            $new_row = !$new_row;
+            if($new_row){
+            ?>
+            </div>
+            <?php 
+              } 
+            }
+              if(!$new_row)
+              {
+            ?>
+              </div>
+            <?php
+              }
+
+              $query = "SELECT roll_no, name, portfolio, email_id from hall_council natural join student_data WHERE hall_code = '$hall_code'";
+              $run = mysqli_query($connection, $query);
+              $new_row = true;
+
+              while($result = mysqli_fetch_assoc($run))
+              {
+            ?>
+            <?php
+            if($new_row){
+            ?>
+            <div class="row">
+            <?php } ?>
 
                 <div class="col-md-4">
                   <div class="card" >
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <h5 class="card-title"><?php echo $result['name']; ?></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['portfolio']; ?></h6>
 
                       <br>
-                      <p class="card-text card-label">Contact: </p>
-                      <p class="card-text card-label">Email ID: </p>
+                      <span class="card-text card-label">Phone Number(s): </span>| 
+                      <?php
+                          $temp = $result['roll_no'];
+                          $subquery = "SELECT phone_number from contact_details where login_id='$temp'";
+                          $subrun = mysqli_query($connection, $subquery);
+                          while($subresult = mysqli_fetch_assoc($subrun))
+                          {
+                            echo $subresult['phone_number']." | ";
+                          }
+                      ?>
+                      <br>
+                      <span class="card-text card-label" >Email ID: </span><?php echo $result['email_id']; ?>
                     </div>
                   </div>
                 </div>
 
+            <?php
+            $new_row = !$new_row;
+            if($new_row){
+            ?>
             </div>
+            <?php 
+              } 
+            }
+              if(!$new_row)
+              {
+            ?>
+              </div>
+            <?php
+              }
+            ?>
     		</div>
 
 
