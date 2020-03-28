@@ -260,7 +260,34 @@ $hall_code = $_SESSION['hall_code'];
 
 
     		<div id="hall-contacts-cover-div" style="display: none;">
-    			Hello Contacts
+            <div class="row">
+                <div class="col-md-4">
+            			<div class="card" >
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+
+                      <br>
+                      <p class="card-text card-label">Contact: </p>
+                      <p class="card-text card-label">Email ID: </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card" >
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+
+                      <br>
+                      <p class="card-text card-label">Contact: </p>
+                      <p class="card-text card-label">Email ID: </p>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
     		</div>
 
 

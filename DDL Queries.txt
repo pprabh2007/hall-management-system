@@ -1,0 +1,125 @@
+#######################################################################
+#								                                      #         
+#	                  DATA DEFINITION LANGUAGE		                  #
+#                                                                     #
+#######################################################################
+
+
+1)
+CREATE TABLE hall_data(
+	hall_code VARCHAR(20) PRIMARY KEY,
+	hall_name VARCHAR(100),
+	description TEXT,
+	image_path VARCHAR(20),
+	no_of_boarders INT
+);
+
+2)
+CREATE TABLE student_data(
+	roll_no VARCHAR(20) PRIMARY KEY,
+	name VARCHAR(20),
+	branch_code VARCHAR(100),
+	date_of_birth DATE,
+	email_id VARCHAR(100),
+	hall_code VARCHAR(20)
+	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
+);
+
+3)
+CREATE TABLE hall_authorities(
+	employee_id VARCHAR(20) PRIMARY KEY,
+	name VARCHAR(20),
+	position VARCHAR(20),
+	date_of_appointment DATE,
+	email_id VARCHAR(100),
+	hall_code VARCHAR(20),
+	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
+);
+
+4)
+CREATE TABLE hall_council(
+	roll_no VARCHAR(20) PRIMARY KEY,
+	portfolio VARCHAR(20),
+	hall_code VARCHAR(20),
+	FOREIGN KEY(roll_no) REFERENCES student_data(roll_no) ON DELETE CASCADE,
+	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
+);
+
+
+5)
+CREATE TABLE hall_news(
+	sr_no INT PRIMARY KEY AUTO_INCREMENT,
+	hall_code VARCHAR(20),
+	date DATE,
+	title VARCHAR(100),
+	content TEXT,
+	issuing_auth VARCHAR(20),
+	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
+);
+
+6)
+CREATE TABLE login_credentials(
+	login_id VARCHAR(20),
+	login_category VARCHAR(20),
+	login_password VARCHAR(20)
+);
+
+7)
+CREATE TABLE contact_details(
+	roll_no VARCHAR(20),
+	phone_number VARCHAR(20),
+	PRIMARY KEY(roll_no,phone_number),
+	FOREIGN KEY(roll_no) REFERENCES student_data(roll_no) ON DELETE CASCADE
+);
+
+8)
+CREATE TABLE complaints(
+	complaint_no INT PRIMARY KEY AUTO_INCREMENT,
+	category VARCHAR(20),
+	complaint_title VARCHAR(100),
+	content TEXT,
+	date DATE,
+	roll_no VARCHAR(20),
+	hall_code VARCHAR(20),
+	no_of_upvotes INT DEFAULT 0,
+	FOREIGN KEY(roll_no) REFERENCES student_data(roll_no) ON DELETE CASCADE,
+	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
+);
+
+9)
+CREATE TABLE upvotes(
+	complaint_no INT,
+	login_id VARCHAR(20),
+	PRIMARY KEY(complaint_no,login_id),
+	FOREIGN KEY(complaint_no) REFERENCES complaints(complaint_no) ON DELETE CASCADE,
+	FOREIGN KEY(login_id) REFERENCES student_data(roll_no) ON DELETE CASCADE
+);
+
+10)
+CREATE TABLE general_news(
+	sr_no INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(100),
+	content TEXT,
+	date DATE
+);
+
+
+#######################################################################
+#								                                      #         
+#	                       TRIGGERS		                              #
+#                                                                     #
+#######################################################################
+
+1)
+CREATE OR REPLACE TRIGGER increment_votes AFTER INSERT ON upvotes
+FOR EACH ROW
+UPDATE complaints
+SET no_of_upvotes=no_of_upvotes+1
+WHERE NEW.complaint_no=complaints.complaint_no;
+
+2)
+CREATE OR REPLACE TRIGGER decrement_votes AFTER DELETE ON upvotes
+FOR EACH ROW
+UPDATE complaints
+SET no_of_upvotes=no_of_upvotes-1
+WHERE OLD.complaint_no=complaints.complaint_no;
