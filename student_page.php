@@ -60,6 +60,26 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
       }
+
+      function upvote(elem)
+      {
+
+        var button = document.getElementById(elem.id);
+        
+        if(button.classList.contains("btn-outline-primary"))
+        {
+          button.classList.remove("btn-outline-primary");
+          button.classList.add("btn-primary"); 
+          button.innerHTML = '<i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)+1);
+        }
+        else
+        {
+          button.classList.add("btn-outline-primary");
+          button.classList.remove("btn-primary");
+          button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
+        }
+      }
+
     </script>
   </head>
 
@@ -201,7 +221,7 @@ $hall_code = $_SESSION['hall_code'];
     				            <select class="form-control" name="complaint_category">
                           <option>Maintenance</option>
                           <option>Mess</option>
-                          <option>So-Cult</option
+                          <option>So-Cult</option>
                           <option>Sports</option>
                       	  <option>Student Welfare</option>
                           <option>Technology</option>
@@ -228,34 +248,37 @@ $hall_code = $_SESSION['hall_code'];
     				<!---->
     				<?php
     				}
-    				?>
-    				<div class="accordion container" id="news-accordion">
-    				  <?php
+    				
     				    require("db_connect.php");
     				    $query = "SELECT * from complaints WHERE hall_code = '$hall_code' order by no_of_upvotes desc";
     				    $run = mysqli_query($connection, $query);
     				    while($result = mysqli_fetch_assoc($run))
     				    {
+
+                    $subquery = "SELECT name from student_data WHERE roll_no = '$id'";
+                    $subrun = mysqli_query($connection, $subquery);
+                    $subresult = mysqli_fetch_assoc($subrun);
     				  ?>
-      				  <div class="card">
-      				    <div class="card-header" id="news-head-<?php echo $result['complaint_no']; ?>">
-      				      <span class="btn" id="news-head-date"><?php echo $result['date']; ?></span>
-      				        <button class="btn btn-link collapsed" id="news-head-text" type="button" data-toggle="collapse" data-target="#news-<?php echo $result['complaint_no']; ?>" aria-expanded="true" aria-controls="news-<?php echo $result['complaint_no']; ?>">
-      				          <?php echo $result['complaint_title']; ?>
-      				        </button>
-      				    </div>
-      				    <div id="news-<?php echo $result['complaint_no']; ?>" class="collapse" aria-labelledby="news-head-<?php echo $result['complaint_no']; ?>" data-parent="#news-accordion">
-      				      <div class="card-body">
-      				        <?php echo $result['content']; ?>
-      				      </div>
-      				    </div>
-      				  </div>
+      				  <div class="card" style="margin-top: 1rem; width: 90%;">
+                  <div class="card-header">
+                    <span style="float: left;"><?php echo $subresult['name']; ?></span>
+                    <span style="float: right;"><?php echo $result['date']; ?></span>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title"><?php echo $result['complaint_title']; ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
+                    <p class="card-text"><?php echo $result['content']; ?></p>
+                    <button type="button" class="btn btn-primary">Feedback</a>
+                    <button type="button" style="margin-left: 1rem; "class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote(this)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                  </div>
+                </div>
     				  <?php
+                    mysqli_free_result($subrun);
     				    }
     				    mysqli_free_result($run);
     				    mysqli_close($connection);
     				  ?>
-    				</div>
+    		
     		</div>
 
 
@@ -306,7 +329,10 @@ $hall_code = $_SESSION['hall_code'];
             </div>
             <?php 
               } 
+              mysqli_free_result($subrun);
             }
+            mysqli_free_result($run);
+
               if(!$new_row)
               {
             ?>
@@ -357,7 +383,9 @@ $hall_code = $_SESSION['hall_code'];
             </div>
             <?php 
               } 
+              mysqli_free_result($subrun);
             }
+            mysqli_free_result($run);
               if(!$new_row)
               {
             ?>
