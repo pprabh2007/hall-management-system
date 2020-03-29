@@ -61,24 +61,6 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
       }
 
-      function upvote(elem)
-      {
-        var button = document.getElementById(elem.id);
-        
-        if(button.classList.contains("btn-outline-primary"))
-        {
-          button.classList.remove("btn-outline-primary");
-          button.classList.add("btn-primary"); 
-          button.innerHTML = '<i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)+1);
-        }
-        else
-        {
-          button.classList.add("btn-outline-primary");
-          button.classList.remove("btn-primary");
-          button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
-        }
-      }
-
       function upvote_temp(comp_no)
       {
           var button = document.getElementById('upvote-'+comp_no);

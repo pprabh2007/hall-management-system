@@ -23,7 +23,6 @@
       </div>
     </div>
     <div class="container">
-      <h3> About </h3>
       <p>
         This application was developed as a part of the term project for the <i>'Database Management Systems'</i>
         course by:
