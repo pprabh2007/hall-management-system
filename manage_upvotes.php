@@ -10,23 +10,19 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['type']) || !isset($_SESSION['ha
 
 
 	require('db_connect.php');
-	$query = "SELECT * FROM upvotes WHERE roll_no='$id' and complaint_id=$temp";
+	$query = "SELECT * FROM upvotes WHERE login_id='$id' and complaint_no=$temp";
 	$run = mysqli_query($connection, $query);
 	$row_cnt = mysqli_num_rows($run);
 
 	if($row_cnt == 0)
 	{
-		$query = "INSERT INTO upvotes(roll_no, complaint_id) VALUES ('$id', $temp)";
-		$run = mysqli_query($connection, $query);
-		$query = "UPDATE complaints set no_of_upvotes = no_of_upvotes + 1 where complaint_no=$temp";
+		$query = "INSERT INTO upvotes(login_id, complaint_no) VALUES ('$id', $temp);";
 		$run = mysqli_query($connection, $query);
 		echo "1";
 	}
 	else
 	{
-		$query = "DELETE FROM upvotes WHERE roll_no='$id' and complaint_id=$temp";
-		$run = mysqli_query($connection, $query);
-		$query = "UPDATE complaints set no_of_upvotes = no_of_upvotes - 1 where complaint_no=$temp";
+		$query = "DELETE FROM upvotes WHERE login_id='$id' and complaint_no=$temp;";
 		$run = mysqli_query($connection, $query);
 		echo "0";
 	}

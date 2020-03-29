@@ -11,7 +11,7 @@
 
 		if ($result = mysqli_fetch_assoc($run))
     {
-      if ($_POST['password'] == $result['login_password'])
+      if (password_verify($_POST['password'], $result['login_password']))
       {
         if ($_POST['category'] == 'Warden')
   			{
@@ -27,9 +27,10 @@
   			$_SESSION['id'] = $_POST['id'];
   			$_SESSION['type'] = $_POST['category'];
   			$_SESSION['hall_code'] = $result['hall_code'];
+				$_SESSION['tab'] = 'about';
         mysqli_free_result($run);
   			mysqli_close($connection);
-  			header('Location: student_page.php');
+  			header('Location: account_home.php');
       }
       else
       {
@@ -61,7 +62,7 @@
     <?php include('navbar.php'); ?>
     <br>
     <div class = "container">
-      <form action="login.php" method="POST">
+      <form action="sign_in.php" method="POST">
         <div class="form-group">
         	<label for="id">Roll Number or Employee ID</label>
         	<input type="text" class="form-control" id="id" name="id" required="required">

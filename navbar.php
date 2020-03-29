@@ -1,6 +1,6 @@
 <?php
 	if (session_id() == '')
-		session_start();
+		session_start(); 
 ?>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container">
@@ -26,7 +26,7 @@
         {
         ?>
   	      <li class="nav-item">
-  	        <a class="nav-link" href="login.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
+  	        <a class="nav-link" href="sign_in.php"> <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In </a>
   	      </li>
   	      <li class="nav-item">
   	        <a class="nav-link" href="register.php"> <i class="fa fa-user-plus" aria-hidden="true"></i> Register </a>
@@ -37,7 +37,7 @@
         {
         ?>
           <li class="nav-item">
-  	        <a class="nav-link" href="student_page.php"> <i class="fa fa-user" aria-hidden="true"></i> My Account </a>
+  	        <a class="nav-link" href="account_home.php"> <i class="fa fa-user" aria-hidden="true"></i> My Account </a>
   	      </li>
           <li class="nav-item">
   	        <a class="nav-link" href="sign_out.php"> <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out </a>

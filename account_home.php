@@ -26,7 +26,7 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-about-cover-div').style.display = 'none';
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
-        document.getElementById('hall-status-cover-div').style.display = 'none';
+        document.getElementById('news_button').focus();
       }
       function loadHallAbout()
       {
@@ -34,7 +34,7 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('hall-about-cover-div').style.display = 'block';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
-        document.getElementById('hall-status-cover-div').style.display = 'none';
+        document.getElementById('about_button').focus();
       }
       function loadHallComplaints()
       {
@@ -42,7 +42,7 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-about-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('hall-complaints-cover-div').style.display = 'block';
-        document.getElementById('hall-status-cover-div').style.display = 'none';
+        document.getElementById('complaints_button').focus();
       }
       function loadHallContacts()
       {
@@ -50,54 +50,97 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-about-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'block';
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
-        document.getElementById('hall-status-cover-div').style.display = 'none';
+        document.getElementById('contacts_button').focus();
       }
-      function loadStatusForm()
+
+      $(document).ready(function()
       {
-        document.getElementById('hall-news-cover-div').style.display = 'none';
-        document.getElementById('hall-about-cover-div').style.display = 'none';
-        document.getElementById('hall-status-cover-div').style.display = 'block';
-        document.getElementById('hall-complaints-cover-div').style.display = 'none';
-        document.getElementById('hall-contacts-cover-div').style.display = 'none';
-      }
+        $("#about_button").click(function()
+        {
+          var tab = 'about';
+          $.post("change_tab.php",
+          {
+            tab_name: tab,
+          },
+          function()
+          {
+            loadHallAbout();
+          });
+        });
+        $("#news_button").click(function()
+        {
+          var tab = 'news';
+          $.post("change_tab.php",
+          {
+            tab_name: tab,
+          },
+          function()
+          {
+            loadHallNews();
+          });
+        });
+        $("#complaints_button").click(function()
+        {
+          var tab = 'complaints';
+          $.post("change_tab.php",
+          {
+            tab_name: tab,
+          },
+          function()
+          {
+            loadHallComplaints();
+          });
+        });
+        $("#contacts_button").click(function()
+        {
+          var tab = 'contacts';
+          $.post("change_tab.php",
+          {
+            tab_name: tab,
+          },
+          function()
+          {
+            loadHallContacts();
+          });
+        });
+      });
 
       function upvote_temp(comp_no)
       {
-          var button = document.getElementById('upvote-'+comp_no);
-          var ajax;
-          if (window.XMLHttpRequest)
-          { // Mozilla, Safari, ...
-            ajax = new XMLHttpRequest();
-          } 
-          else if (window.ActiveXObject) 
-          { // IE 8 and older
-            ajax = new ActiveXObject("Microsoft.XMLHTTP");
-          } 
-          ajax.open("POST", "manage_upvotes.php", true);
-          
-          var data = "comp_no="+comp_no;
-          ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          ajax.send(data);
-          ajax.onreadystatechange = function()
-          {
-            if (this.readyState == 4 && this.status == 200) 
-            {
-              if(this.responseText==="0")
-              {
-                  button.classList.add("btn-outline-primary");
-                  button.classList.remove("btn-primary");
-                  button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
-              }
-              else
-              {
-                  button.classList.remove("btn-outline-primary");
-                  button.classList.add("btn-primary"); 
-                  button.innerHTML = '<i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)+1);
-              }
-            }
-          };
-      }
+        var button = document.getElementById('upvote-'+comp_no);
+        var ajax;
+        if (window.XMLHttpRequest)
+        { // Mozilla, Safari, ...
+          ajax = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject)
+        { // IE 8 and older
+          ajax = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        ajax.open("POST", "manage_upvotes.php", true);
 
+        var data = "comp_no="+comp_no;
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajax.send(data);
+        ajax.onreadystatechange = function()
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            if(this.responseText==="0")
+            {
+                button.classList.add("btn-outline-primary");
+                button.classList.remove("btn-primary");
+                button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
+            }
+            else
+            {
+                button.classList.remove("btn-outline-primary");
+                button.classList.add("btn-primary");
+                button.innerHTML = '<i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)+1);
+            }
+          }
+        };
+      }
     </script>
   </head>
 
@@ -107,23 +150,19 @@ $hall_code = $_SESSION['hall_code'];
     	<div class="col-lg-2 col-sm-3 justify-content-center" >
     		<div id="option-bar">
     			<ul class="option-bar-list list-unstyled">
-    				<button class="btn btn-link" autofocus onclick="loadHallAbout()">
+    				<button class="btn btn-link" id="about_button">
     					About the Hall
     				</button>
     				<br>
-    				<button class="btn btn-link" onclick="loadHallNews()">
+    				<button class="btn btn-link" id="news_button">
     					Hall News
     				</button>
     				<br>
-    				<button class="btn btn-link" onclick="loadHallComplaints()">
+    				<button class="btn btn-link" id="complaints_button">
     					View Complaints
     				</button>
-    				<!-- <br>
-    				<button  class="btn btn-link" onclick="loadStatusForm()">
-    					Check Status
-    				</button> -->
     				<br>
-    				<button class="btn btn-link" onclick="loadHallContacts()">
+    				<button class="btn btn-link" id="contacts_button">
     					Useful Contacts
     				</button>
     			</ul>
@@ -208,9 +247,20 @@ $hall_code = $_SESSION['hall_code'];
 
 
     		<div id="hall-about-cover-div">
-    				<p>
-    					Bacon ipsum dolor amet drumstick beef ribs prosciutto porchetta meatball doner ham hamburger pastrami jowl, fatback jerky picanha. Buffalo tail flank ribeye turducken ham hock boudin jerky picanha short ribs. Bacon alcatra kielbasa swine doner rump jowl ground round brisket tenderloin andouille beef ribs turducken burgdoggen. Pastrami turkey shank, chislic cupim capicola sausage pancetta. Capicola turkey landjaeger porchetta filet mignon strip steak.
-    				</p>
+    			<?php
+            require('db_connect.php');
+            $sql = "SELECT * FROM hall_data WHERE hall_code='$hall_code'";
+            $run = mysqli_query($connection,$sql);
+            if ($result = mysqli_fetch_assoc($run))
+            {
+              echo $result['hall_name'];
+          ?>
+          <!-- Add Your Code Here -->
+          <?php
+            }
+            mysqli_free_result($run);
+            mysqli_close($connection);
+          ?>
     		</div>
 
 
@@ -239,7 +289,7 @@ $hall_code = $_SESSION['hall_code'];
     				            <select class="form-control" name="complaint_category">
                           <option>Maintenance</option>
                           <option>Mess</option>
-                          <option>So-Cult</option>
+                          <option>So-Cult</option
                           <option>Sports</option>
                       	  <option>Student Welfare</option>
                           <option>Technology</option>
@@ -266,72 +316,71 @@ $hall_code = $_SESSION['hall_code'];
     				<!---->
     				<?php
     				}
-    				
+    				?>
+    				<div class="accordion container" id="news-accordion">
+    				  <?php
     				    require("db_connect.php");
     				    $query = "SELECT * from complaints WHERE hall_code = '$hall_code' order by no_of_upvotes desc";
     				    $run = mysqli_query($connection, $query);
     				    while($result = mysqli_fetch_assoc($run))
     				    {
-
-                    $subquery = "SELECT name from student_data WHERE roll_no = '$id'";
-                    $subrun = mysqli_query($connection, $subquery);
-                    $subresult = mysqli_fetch_assoc($subrun);
-    				  ?>
-      				  <div class="card" style="margin-top: 1rem; width: 90%;">
-                  <div class="card-header">
-                    <span style="float: left;"><?php echo $subresult['name']; ?></span>
-                    <span style="float: right;"><?php echo $result['date']; ?></span>
+                  $subquery = "SELECT name from student_data WHERE roll_no = '$id'";
+                  $subrun = mysqli_query($connection, $subquery);
+                  $subresult = mysqli_fetch_assoc($subrun);
+        			?>
+          				<div class="card" style="margin-top: 1rem; width: 90%;">
+                    <div class="card-header">
+                      <span style="float: left;"><?php echo $subresult['name']; ?></span>
+                      <span style="float: right;"><?php echo $result['date']; ?></span>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><?php echo $result['complaint_title']; ?></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
+                      <p class="card-text"><?php echo $result['content']; ?></p>
+                      <button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
+                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                    </div>
                   </div>
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo $result['complaint_title']; ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
-                    <p class="card-text"><?php echo $result['content']; ?></p>
-                    <button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
-                    <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
-                  </div>
-                </div>
-    				  <?php
-                    mysqli_free_result($subrun);
+        			<?php
+                  mysqli_free_result($subrun);
     				    }
     				    mysqli_free_result($run);
     				    mysqli_close($connection);
     				  ?>
-    		
+    				</div>
     		</div>
 
 
     		<div id="hall-contacts-cover-div" style="display: none;">
-            <?php
-                require("db_connect.php");
-                $query = "SELECT employee_id, name, position, email_id from hall_authorities WHERE hall_code = '$hall_code'";
-                $run = mysqli_query($connection, $query);
-                $new_row = true;
-                while($result = mysqli_fetch_assoc($run))
+          <?php
+              require("db_connect.php");
+              $query = "SELECT employee_id, name, position, email_id from hall_authorities WHERE hall_code = '$hall_code'";
+              $run = mysqli_query($connection, $query);
+              $new_row = true;
+              while($result = mysqli_fetch_assoc($run))
+              {
+                if($new_row)
                 {
-                  
+                  echo '<div class="row">';
+                }
             ?>
-
-            <?php
-            if($new_row){
-            ?>
-            <div class="row">
-            <?php } ?>
-
                 <div class="col-md-4">
-            			<div class="card" >
+                  <div class="card" >
                     <div class="card-body">
                       <h5 class="card-title"><?php echo $result['name']; ?></h5>
                       <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['position']." Warden"; ?></h6>
-
                       <br>
-                      <span class="card-text card-label">Phone Number(s): </span>| 
+                      <span class="card-text card-label">Phone Number(s): </span>|
                       <?php
                           $temp = $result['employee_id'];
                           $subquery = "SELECT phone_number from contact_details where login_id='$temp'";
                           $subrun = mysqli_query($connection, $subquery);
-                          while($subresult = mysqli_fetch_assoc($subrun))
+                          if ($subrun)
                           {
-                            echo $subresult['phone_number']." | ";
+                            while($subresult = mysqli_fetch_assoc($subrun))
+                            {
+                              echo $subresult['phone_number']." | ";
+                            }
                           }
                       ?>
                       <br>
@@ -339,23 +388,16 @@ $hall_code = $_SESSION['hall_code'];
                     </div>
                   </div>
                 </div>
-
             <?php
-            $new_row = !$new_row;
-            if($new_row){
-            ?>
-            </div>
-            <?php 
-              } 
-              mysqli_free_result($subrun);
-            }
-            mysqli_free_result($run);
-
+                $new_row = !$new_row;
+                if($new_row)
+                {
+                  echo '</div>';
+                }
+              }
               if(!$new_row)
               {
-            ?>
-              </div>
-            <?php
+                echo '</div>';
               }
 
               $query = "SELECT roll_no, name, portfolio, email_id from hall_council natural join student_data WHERE hall_code = '$hall_code'";
@@ -364,12 +406,11 @@ $hall_code = $_SESSION['hall_code'];
 
               while($result = mysqli_fetch_assoc($run))
               {
+                if($new_row)
+                {
+                  echo '<div class="row">';
+                }
             ?>
-            <?php
-            if($new_row){
-            ?>
-            <div class="row">
-            <?php } ?>
 
                 <div class="col-md-4">
                   <div class="card" >
@@ -378,14 +419,17 @@ $hall_code = $_SESSION['hall_code'];
                       <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['portfolio']; ?></h6>
 
                       <br>
-                      <span class="card-text card-label">Phone Number(s): </span>| 
+                      <span class="card-text card-label">Phone Number(s): </span>|
                       <?php
                           $temp = $result['roll_no'];
                           $subquery = "SELECT phone_number from contact_details where login_id='$temp'";
                           $subrun = mysqli_query($connection, $subquery);
-                          while($subresult = mysqli_fetch_assoc($subrun))
+                          if ($subrun)
                           {
-                            echo $subresult['phone_number']." | ";
+                            while($subresult = mysqli_fetch_assoc($subrun))
+                            {
+                              echo $subresult['phone_number']." | ";
+                            }
                           }
                       ?>
                       <br>
@@ -395,30 +439,30 @@ $hall_code = $_SESSION['hall_code'];
                 </div>
 
             <?php
-            $new_row = !$new_row;
-            if($new_row){
-            ?>
-            </div>
-            <?php 
-              } 
-              mysqli_free_result($subrun);
-            }
-            mysqli_free_result($run);
+                $new_row = !$new_row;
+                if($new_row)
+                {
+                  echo '</div>';
+                }
+              }
               if(!$new_row)
               {
-            ?>
-              </div>
-            <?php
+                echo '</div>';
               }
             ?>
     		</div>
 
-
-    		<!-- <div id="hall-status-cover-div" style="display: none;">
-    			Hello Status
-    		</div> -->
-
     	</div>
     </div>
+    <?php
+      if ($_SESSION['tab'] == 'about')
+        echo '<script type="text/javascript">loadHallAbout();</script>';
+      else if ($_SESSION['tab'] == 'news')
+        echo '<script type="text/javascript">loadHallNews();</script>';
+      else if ($_SESSION['tab'] == 'complaints')
+        echo '<script type="text/javascript">loadHallComplaints();</script>';
+      else if ($_SESSION['tab'] == 'contacts')
+        echo '<script type="text/javascript">loadHallContacts();</script>';
+    ?>
   </body>
 </html>

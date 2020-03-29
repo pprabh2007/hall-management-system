@@ -6,7 +6,7 @@
 		{
 			$login_id = $_POST['reg-roll-no'];
 			$login_cat = $_POST['reg-category'];
-			$login_pword = $_POST['reg-password'];
+			$login_pword = password_hash($_POST['reg-password'], PASSWORD_DEFAULT);
 			$sql = "INSERT INTO login_credentials(login_id,login_category,login_password) VALUES('$login_id','$login_cat','$login_pword')";
 			if(!mysqli_query($connection,$sql))
 			{
@@ -320,7 +320,7 @@
         <div>
       		<input class="btn btn-primary" title="" id="form-submit" type="submit" name="submit" value="Register">
       		<small class="btn" style="padding-left: 1.5rem">
-            Already have an account? <a href="login.php" >Sign In</a>
+            Already have an account? <a href="sign_in.php" >Sign In</a>
           </small>
         </div>
         <br>

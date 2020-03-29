@@ -25,5 +25,5 @@ if($type != "Warden" && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['su
   }
   mysqli_close($connection);
 }
-header('Location: student_page.php');
+header('Location: account_home.php');
 ?>

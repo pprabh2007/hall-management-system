@@ -45,5 +45,5 @@ if($type != 'Boarder' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['s
   }
   mysqli_close($connection);
 }
-header('Location: student_page.php');
+header('Location: account_home.php');
 ?>

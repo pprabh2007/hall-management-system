@@ -14,7 +14,7 @@
     <?php include('navbar.php'); ?>
     <div class="jumbotron " id="main-jumbotron-home">
       <div class="container">
-        <h1 class="display-4">Hall Management Council</h1>
+        <h1 class="display-4">Hall Management Centre</h1>
         <p class="lead">Indian Institute of Technology, Kharagpur</p>
         <hr class="my-4">
         <p class="lead">
@@ -25,37 +25,26 @@
     <div class="container">
       <h3> Home </h3>
       <p>
-        Bacon ipsum dolor amet tenderloin ribeye beef ribs tail pork belly chicken andouille ground round pork chop
-        salami sausage sirloin. Pancetta shankle porchetta ground round pork loin pastrami cupim tri-tip. Spare
-        ribs chop sausage, t-bone bresaola burgdoggen meatball pig short ribs tail picanha chislic jowl prosciutto
-        turducken. Bacon tail biltong, picanha shank short loin ham hock kielbasa strip steak burgdoggen doner
-        jerky chuck.
+        IIT-KGP is the 1st IIT and has the largest campus area among all the IITs. The appeal of vast expanses
+        of green, sweeping trees everywhere and the classic architecture blends in with the creative lifestyle
+        of young KGPians. Full residential campus away from the hustle-bustle of city life accelerates the
+        student life towards social and creative gatherings and develops among them the extra-ordinary skill in
+        all the spheres.
       </p>
       <p>
-        Doner bresaola filet mignon pancetta prosciutto sirloin. Hamburger venison burgdoggen brisket shankle
-        shoulder leberkas, bacon pancetta pastrami pig drumstick ham jerky. Drumstick pig jowl ham short loin ball
-        tip burgdoggen bresaola shank. Chislic prosciutto beef alcatra, ball tip turducken swine meatball venison
-        buffalo strip steak sausage boudin. Burgdoggen pork loin beef cupim chislic.
+        IIT-KGP campus plays a major role in students’ academic and social life, making the KGP stay most
+        memorable days of their life and making them ready to shine in the World — what we call as KGPians.
+        One key element of this campus experience is one's 'Hall of Residence'.
       </p>
       <p>
-        Venison hamburger bresaola salami, sausage andouille drumstick cupim alcatra. Shank strip steak rump,
-        drumstick shankle meatball burgdoggen pancetta doner frankfurter chislic jerky chicken prosciutto andouille.
-        Cupim swine salami tail short loin, bacon pork turducken alcatra picanha. Doner pork belly shoulder short
-        loin hamburger flank ribeye turkey salami drumstick sausage tenderloin.
+        The institute is fully residential. Students are accommodated in 21 Halls of Residence and the staff is
+        provided with quarters. Accommodation for visitors is arranged in the Technology Guest House, CEC Guest
+        House, Alumni Guest House or CTS Visitors Hall, or if need arises, in students' Hall of Residence.
       </p>
       <p>
-        Pastrami beef turducken beef ribs short loin, pig ham hock corned beef. Corned beef frankfurter leberkas
-        filet mignon, doner meatball kevin. Burgdoggen pork belly salami pork loin brisket, ham hock turducken
-        shankle short ribs meatloaf beef ribs capicola. Ribeye brisket beef sausage doner porchetta meatball
-        pancetta. Ribeye sirloin short loin short ribs. Ball tip doner buffalo ground round sausage corned beef.
-      </p>
-      <p>
-        Flank andouille pork chop, pastrami pork belly turducken rump meatball swine frankfurter hamburger ground
-        round sirloin ham bacon. Alcatra beef ribs sirloin pork loin. Cow shoulder ham, chuck venison buffalo
-        alcatra pancetta bacon spare ribs sausage pork loin pork pig. Shoulder ground round capicola tri-tip pork
-        shankle hamburger andouille doner chuck venison short ribs meatball tail. Spare ribs filet mignon bresaola
-        rump meatloaf, shank drumstick chuck jowl porchetta. Ham hock kevin swine ribeye chislic picanha hamburger.
-        Bacon tongue prosciutto, kielbasa ham pancetta ball tip meatloaf spare ribs ground round pastrami.
+        It won't be an exageration to say that the Hall is one of the key anchors of Student Life at IIT-KGP.
+        Halls at Kharagpur are places to live, nurture, grow and excel. We dedicate this application towards
+        the unique 'Hall Culture' of IIT Kharagpur.
       </p>
     </div>
   </body>
