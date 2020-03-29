@@ -1,0 +1,93 @@
+#
+AZH   Azad Hall of Residence
+<p>With a rich heritage of dramatics and literary professional artworks to boast of, Azad has always promoted its boarders to come up, nurture and showcase their talents. Having started ‘Illumination’ at IIT Kharagpur, life at Azad is always full of excitement and one could always count on a few incorrigible nutcases to spice up the lives of the hall residents.</p>
+
+
+#
+BCR   B C Roy Hall of Residence
+
+
+#
+BRH   B R Ambedkar Hall of Residence
+
+
+#
+GKH   Gokhale Hall of Residence
+
+
+#
+HJB   Homi J Bhabha Hall of Residence
+
+
+#
+JCB   Jagadish Chandra Bose Hall of Residence
+
+
+#
+JNH   Nehru Hall of Residence
+<p>Located in a corner of the so-called PAN loop, Nehru Hall is the second oldest hall of residence. The hall is well known for developing a culture, so unique and prosaic, that is systematically propagated from generation to generation. A naive visitor on a wintry night, is indeed, often amazed at the abrupt transition to a warmth and bustle of relentless activity, as he steps inside from the cold and desolation.</p> 
+
+
+# 
+LBS   Lalbahadur Sastry Hall of Residence
+<p>The Lal Bahadur Shastri Hall of Residence is among the newest hostels. The four storey building is a fine example of the infrastructural expansion and renovation that the campus has undergone in the recent years. With an expandable capacity of more than 2000, it currently houses 1400 students which include first and second year B.Tech students.</p>
+
+
+#
+LLR   Lala Lajpat Rai Hall of Residence
+
+
+#
+MMM   Madan Mohan Malviya Hall of Residence
+<p>Pronounced 'Triple M', the Madan Mohan Malviya hall is divided into four blocks, this hall can house over 1600 students with two people sharing a room.</p> 
+
+
+#
+MSH   Megnad Saha Hall of Residence
+
+
+#
+MTH   Mother Teresa Hall of Residence
+
+
+# 
+NVH   Nivedita Hall of Residence
+
+
+#
+PTH   Patel Hall of Residence
+<p>Being the hall which once housed the Gymkhana, its walls speak of stories of the past and present. The motto of the hall is lux et veritas vincant (translated as “Let Light and Truth Prevail”) and the residents and alumni, better known as Patelians, live by this motto.</p>
+
+
+#
+RKH   Radha Krishnan Hall of Residence
+<p>Radha Krishnan Hall stands out for its unique culture, which is woven around the principle of unity, especially its Wing culture, where boarders of all years live together, giving excellent exposure and enrichment to a RKite's life. RKites of yesteryears occupy some of the most important positions in industry and academics. RK Hall has always stood as one of the foremost in the campus, be it sports, so-cults or the coveted Illumination.</p> 
+
+
+#
+RLB   Rani Laxmibai Hall of Residence
+
+
+#
+RPH   Rajendra Prasad Hall of Residence
+<p>Being the hall that is closest to the main entrance of IIT Kharagpur, Rajendra Prasad Hall of Residence has always greeted the campus visitors very proudly. RP Hall also boasts of being the hall with the largest number of boarders. The motto of Rajendra Prasad Hall is ‘Gentlemen by Choice’ and the boarders of the hall give the fullest justice to their motto.</p>
+
+#
+SAM   SAM Hall of Residence
+
+
+#
+SNH   Sarojini Naidu - Indira Gandhi Hall of Residence
+
+
+#
+VSH   Vidyasagar Hall of Residence
+
+
+
+
+
+
+
+
+

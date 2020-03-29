@@ -338,7 +338,9 @@ $hall_code = $_SESSION['hall_code'];
                       <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
                       <p class="card-text"><?php echo $result['content']; ?></p>
                       <button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
-                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)">
+                        <i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?>
+                     </button>
                     </div>
                   </div>
         			<?php
