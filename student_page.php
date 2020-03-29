@@ -118,10 +118,10 @@ $hall_code = $_SESSION['hall_code'];
     				<button class="btn btn-link" onclick="loadHallComplaints()">
     					View Complaints
     				</button>
-    				<br>
-    				<button class="btn btn-link" onclick="loadStatusForm()">
+    				<!-- <br>
+    				<button  class="btn btn-link" onclick="loadStatusForm()">
     					Check Status
-    				</button>
+    				</button> -->
     				<br>
     				<button class="btn btn-link" onclick="loadHallContacts()">
     					Useful Contacts
@@ -414,9 +414,9 @@ $hall_code = $_SESSION['hall_code'];
     		</div>
 
 
-    		<div id="hall-status-cover-div" style="display: none;">
+    		<!-- <div id="hall-status-cover-div" style="display: none;">
     			Hello Status
-    		</div>
+    		</div> -->
 
     	</div>
     </div>
