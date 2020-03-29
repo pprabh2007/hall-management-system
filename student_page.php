@@ -63,7 +63,6 @@ $hall_code = $_SESSION['hall_code'];
 
       function upvote(elem)
       {
-
         var button = document.getElementById(elem.id);
         
         if(button.classList.contains("btn-outline-primary"))
@@ -78,6 +77,43 @@ $hall_code = $_SESSION['hall_code'];
           button.classList.remove("btn-primary");
           button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
         }
+      }
+
+      function upvote_temp(comp_no)
+      {
+          var button = document.getElementById('upvote-'+comp_no);
+          var ajax;
+          if (window.XMLHttpRequest)
+          { // Mozilla, Safari, ...
+            ajax = new XMLHttpRequest();
+          } 
+          else if (window.ActiveXObject) 
+          { // IE 8 and older
+            ajax = new ActiveXObject("Microsoft.XMLHTTP");
+          } 
+          ajax.open("POST", "manage_upvotes.php", true);
+          
+          var data = "comp_no="+comp_no;
+          ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          ajax.send(data);
+          ajax.onreadystatechange = function()
+          {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+              if(this.responseText==="0")
+              {
+                  button.classList.add("btn-outline-primary");
+                  button.classList.remove("btn-primary");
+                  button.innerHTML = '<i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)-1);
+              }
+              else
+              {
+                  button.classList.remove("btn-outline-primary");
+                  button.classList.add("btn-primary"); 
+                  button.innerHTML = '<i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i>'+(parseInt(button.childNodes[1].data)+1);
+              }
+            }
+          };
       }
 
     </script>
@@ -269,7 +305,7 @@ $hall_code = $_SESSION['hall_code'];
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
                     <p class="card-text"><?php echo $result['content']; ?></p>
                     <button type="button" class="btn btn-primary">Feedback</a>
-                    <button type="button" style="margin-left: 1rem; "class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote(this)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                    <button type="button" style="margin-left: 1rem; "class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
                   </div>
                 </div>
     				  <?php
