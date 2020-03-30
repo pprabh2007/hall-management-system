@@ -345,7 +345,7 @@ $hall_code = $_SESSION['hall_code'];
         if ($type == 'Warden')
         {
       ?>
-        <div id="hall-student-list-div" style="display: none;">
+      <div id="hall-student-list-div" style="display: none;">
           <!-- Modal -->
           <div class="modal fade" id="slist_modal_promote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -417,45 +417,67 @@ $hall_code = $_SESSION['hall_code'];
             </div>
           </div>
         <!-- Modal -->
-          <?php
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Roll Number</th>
+              <th scope="col">Name</th>
+              <th scope="col">Portfolio</th>
+              <th scope="col">Promote/Demote</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <?php
             require("db_connect.php");
             $query = "SELECT * from student_data WHERE hall_code = '$hall_code' order by roll_no";
             $run = mysqli_query($connection, $query);
             while($result = mysqli_fetch_assoc($run))
             {
-              $subquery = "SELECT portfolio from hall_council WHERE roll_no = '".$result['roll_no']."'";
+              $subquery = "SELECT portfolio from hall_council WHERE hall_code = '$hall_code' and roll_no = '".$result['roll_no']."'";
               $subrun = mysqli_query($connection, $subquery);
               if ($subresult = mysqli_fetch_assoc($subrun))
               {
                 $student_auth = $subresult['portfolio'];
                 ?>
-                <div>
-                  <?php echo $result['roll_no'].' -- '.$subresult['portfolio']; ?>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_demote"
+                <tr>
+                  <th scope="row"><?php echo $result['roll_no'] ?></th>
+                  <td><?php echo $result['name'] ?></td>
+                  <td><?php echo $subresult['portfolio'] ?></td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_demote"
                   onclick="document.getElementById('demote-roll-no').value = '<?php echo $result['roll_no']; ?>';
                   document.getElementById('demote-portfolio').value = '<?php echo $subresult['portfolio']; ?>'">
-          				  Remove
-          				</button>
-                </div>
+                    Remove
+                  </button></td>
+                </tr>
                 <?php
               }
               else
               {
                 ?>
-                <div>
-                  <?php echo $result['roll_no']; ?>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_promote"
+                <tr>
+                  <th scope="row"><?php echo $result['roll_no'] ?></th>
+                  <td><?php echo $result['name'] ?></td>
+                  <td> - </td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_promote"
                   onclick="document.getElementById('promote-roll-no').value = '<?php echo $result['roll_no']; ?>'">
-          				  Add
-          				</button>
-                </div>
+                    Add
+                  </button>
+              </td>
+                </tr>
+
+                   
                 <?php
               }
             }
             mysqli_free_result($run);
             mysqli_close($connection);
           ?>
-        </div>
+
+        </tbody>
+        </table>
+
+      </div>
       <?php
         }
       ?>
