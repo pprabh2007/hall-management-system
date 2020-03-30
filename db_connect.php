@@ -3,7 +3,7 @@
 $server_name = 'localhost';
 $server_user_name = 'root';
 $password = '';
-$database_name = 'hms_db';
+$database_name = 'hms';
 
 try
 {

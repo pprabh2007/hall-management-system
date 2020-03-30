@@ -83,12 +83,6 @@ SNH   Sarojini Naidu - Indira Gandhi Hall of Residence
 #
 VSH   Vidyasagar Hall of Residence
 
-CREATE OR REPLACE TRIGGER increment_boarders AFTER INSERT ON student_data
-FOR EACH ROW
-UPDATE hall_data
-SET no_of_boarders=no_of_boarders+1
-WHERE NEW.hall_code=hall_data.hall_code;
-
 
 
 

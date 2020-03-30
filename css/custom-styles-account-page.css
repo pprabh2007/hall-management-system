@@ -45,6 +45,18 @@
 	outline: none;
 }
 
+.btn.btn-primary[disabled]
+{
+    background-color: #888888;
+		border-color: #555555;
+}
+
+.btn.btn-outline-primary[disabled]
+{
+    color: #888888;
+		border-color: #555555;
+}
+
 #page-body
 {
 	text-align: left;
@@ -59,5 +71,4 @@ img
 	margin-bottom: 3rem;
 	width: 60%;
 	box-shadow: 25px 25px 50px 0 white inset, -25px -25px 50px 0 white inset; 
-
 }

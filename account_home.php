@@ -15,7 +15,7 @@ $hall_code = $_SESSION['hall_code'];
   	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/custom-styles-account-page.css?v=<?php echo time(); ?>">
-  	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/custom-styles-home.css?v=<?php echo time(); ?>">
   	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
   	<script type="text/javascript" src="js/bootstrap.js"></script>
   	<script type="text/javascript" src="js/popper.js"></script>
@@ -156,6 +156,19 @@ $hall_code = $_SESSION['hall_code'];
         <?php
           }
          ?>
+        $(".close-comp-btn").click(function()
+        {
+          var complaint_no = $(this).attr('value');
+          $.post("close_complaint.php",
+          {
+            comp_no: complaint_no,
+          },
+          function()
+          {});
+          $(this).prop('disabled', true);
+          $(this).text('Closed');
+          $('#upvote-'+complaint_no).prop('disabled', true);
+        });
       });
 
       function upvote_temp(comp_no)
@@ -241,11 +254,11 @@ $hall_code = $_SESSION['hall_code'];
     				if ($type != 'Boarder')
     				{
     				?>
-      				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#server_modal">
+      				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hall_news_modal">
       				  Add
       				</button>
       				<!-- Modal -->
-      				<div class="modal fade" id="server_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      				<div class="modal fade" id="hall_news_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       				  <div class="modal-dialog" role="document">
       				    <div class="modal-content">
       				      <div class="modal-header">
@@ -317,13 +330,11 @@ $hall_code = $_SESSION['hall_code'];
             $run = mysqli_query($connection,$sql);
             if ($result = mysqli_fetch_assoc($run))
             {
-              //echo $result['hall_name'];
+            //echo $result['hall_name']
           ?>
           <img src="<?php echo $result['image_path']; ?>" >
-          
-          <!-- Add Your Code Here -->
           <?php
-              echo $result['description']; 
+              echo $result['description'];
             }
             mysqli_free_result($run);
             mysqli_close($connection);
@@ -455,11 +466,11 @@ $hall_code = $_SESSION['hall_code'];
     				if ($type != "Warden")
     				{
     				?>
-    				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#server_modal">
+    				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complaint_modal">
     				  Register a Complaint
     				</button>
     				<!-- Modal -->
-    				<div class="modal fade" id="server_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    				<div class="modal fade" id="complaint_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     				  <div class="modal-dialog" role="document">
     				    <div class="modal-content">
     				      <div class="modal-header">
@@ -514,7 +525,7 @@ $hall_code = $_SESSION['hall_code'];
                   $subrun = mysqli_query($connection, $subquery);
                   $subresult = mysqli_fetch_assoc($subrun);
         			?>
-          				<div class="card" style="margin-top: 1rem; width: 90%;">
+          				<div class="card" style="width: 90%;">
                     <div class="card-header">
                       <span style="float: left;"><?php echo $subresult['name']; ?></span>
                       <span style="float: right;"><?php echo $result['date']; ?></span>
@@ -523,13 +534,66 @@ $hall_code = $_SESSION['hall_code'];
                       <h5 class="card-title"><?php echo $result['complaint_title']; ?></h5>
                       <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
                       <p class="card-text"><?php echo $result['content']; ?></p>
-                      <button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
-                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
-                    </div>
+                      <!--<button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
+                      -->
+                      <?php
+                      $subquery2 = "SELECT * from upvotes WHERE login_id = '".$id."' AND complaint_no = '".$result['complaint_no']."';";
+                      $subrun2 = mysqli_query($connection, $subquery2);
+                      if (mysqli_fetch_assoc($subrun2))
+                      {
+                        if ($result['status'] == 'closed' || $type == 'Warden')
+                        {
+                        ?>
+                            <button type="button" class="btn btn-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)" disabled><i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                        <?php
+                        }
+                        else
+                        {
+                        ?>
+                            <button type="button" class="btn btn-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-check-circle" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                        <?php
+                        }
+                      }
+                      else
+                      {
+                        if ($result['status'] == 'closed' || $type == 'Warden')
+                        {
+                        ?>
+                          <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)" disabled><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                        <?php
+                        }
+                        else
+                        {
+                        ?>
+                          <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                        <?php
+                        }
+                      }
+
+                      if ($result['status'] == 'closed')
+                      {
+                      ?>
+                        <button type="button" style="margin-left: 1rem;" class="btn btn-primary close-comp-btn" value="<?php echo $result['complaint_no']; ?>" disabled>Closed</button>
+                      <?php
+                      }
+                      else if ($type == 'Boarder')
+                      {
+                      ?>
+                        <button type="button" style="margin-left: 1rem;" class="btn btn-outline-primary close-comp-btn" value="<?php echo $result['complaint_no']; ?>" disabled>Open</button>
+                      <?php
+                      }
+                      else
+                      {
+                      ?>
+                        <button type="button" style="margin-left: 1rem;" class="btn btn-primary close-comp-btn" value="<?php echo $result['complaint_no']; ?>" >Close</button>
+                      <?php
+                      }
+                      ?>
                     </div>
                   </div>
         			<?php
                   mysqli_free_result($subrun);
+                  mysqli_free_result($subrun2);
     				    }
     				    mysqli_free_result($run);
     				    mysqli_close($connection);
