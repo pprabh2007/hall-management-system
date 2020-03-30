@@ -310,6 +310,9 @@ $hall_code = $_SESSION['hall_code'];
     				    <div id="news-<?php echo $result['sr_no']; ?>" class="collapse" aria-labelledby="news-head-<?php echo $result['sr_no']; ?>" data-parent="#news-accordion">
     				      <div class="card-body">
     				        <?php echo $result['content']; ?>
+                     <br>
+                     <br>
+                     <span style="font-weight: bold;">Issuing Authority: <?php echo $result['issuing_auth']?></span>
     				      </div>
     				    </div>
     				  </div>
