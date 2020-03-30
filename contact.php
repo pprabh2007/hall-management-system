@@ -5,6 +5,7 @@
   	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
   	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-styles-account-page.css">
   	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
   	<script type="text/javascript" src="js/bootstrap.js"></script>
   	<script type="text/javascript" src="js/popper.js"></script>
@@ -23,17 +24,64 @@
       </div>
     </div>
     <div class="container">
-      <h3> Contacts </h3>
-      <p>
-        This application was developed as a part of the term project for the <i>'Database Management Systems'</i>
-        course by:
-        <ul>
-          <li>Prabhpreet Singh Sodhi (17CS10035)</li>
-          <li>Rajdeep Mondal (17CS10041)</li>
-          <li>Sahil Singh (17CS10047)</li>
-          <li>Soumen Dutta (17CS10057)</li>
-        </ul>
-      </p>
+
+      <div class="row">
+            <div class="col-md-5">
+              <div class="card" >
+                <div class="card-body">
+                  <h5 class="card-title">Mr. S. S. Jha</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Security Officer</h6>
+                  <br>
+                  <span class="card-text card-label">Phone Number(s): </span>+91-9434386647
+                  <br>
+                  <span class="card-text card-label" >Email ID: </span>so@hijli.iitkgp.ac.in
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="card" >
+                <div class="card-body">
+                  <h5 class="card-title">Nand Kishor Mahto</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Assistant Security Officer</h6>
+                  <br>
+                  <span class="card-text card-label">Phone Number(s): </span>+91-3222-281004
+                  <br>
+                  <span class="card-text card-label" >Email ID: </span>ndmahto@adm.iitkgp.ac.in
+                </div>
+              </div>
+            </div>
+      </div>
+      <br>
+      <div class="row">
+            <div class="col-md-5">
+              <div class="card" >
+                <div class="card-body">
+                  <h5 class="card-title">Dr. Seema Roy</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Senior Medical Officer</h6>
+                  <br>
+                  <span class="card-text card-label">Phone Number(s): </span>>+91-3222-282664
+                  <br>
+                  <span class="card-text card-label" >Email ID: </span>sroy@adm.iitkgp.ernet.in
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="card" >
+                <div class="card-body">
+                  <h5 class="card-title">Soumen Dutta</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Technological Co-ordinator</h6>
+                  <br>
+                  <span class="card-text card-label">Phone Number(s): </span>+91-9110126545
+                  <br>
+                  <span class="card-text card-label" >Email ID: </span>soumendutta26@gmail.com
+                </div>
+              </div>
+            </div>
+      </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
   </body>
 </html>
