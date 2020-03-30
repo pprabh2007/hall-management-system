@@ -27,6 +27,11 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('news_button').focus();
+        var elem = document.getElementById('student_list_button');
+        if(typeof elem !== null && elem !== 'undefined')
+        {
+          document.getElementById('hall-student-list-div').style.display = 'none';
+        }
       }
       function loadHallAbout()
       {
@@ -35,6 +40,11 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-about-cover-div').style.display = 'block';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('about_button').focus();
+        var elem = document.getElementById('student_list_button');
+        if(typeof elem !== null && elem !== 'undefined')
+        {
+          document.getElementById('hall-student-list-div').style.display = 'none';
+        }
       }
       function loadHallComplaints()
       {
@@ -43,6 +53,11 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('hall-complaints-cover-div').style.display = 'block';
         document.getElementById('complaints_button').focus();
+        var elem = document.getElementById('student_list_button');
+        if(typeof elem !== null && elem !== 'undefined')
+        {
+          document.getElementById('hall-student-list-div').style.display = 'none';
+        }
       }
       function loadHallContacts()
       {
@@ -51,6 +66,24 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-contacts-cover-div').style.display = 'block';
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('contacts_button').focus();
+        var elem = document.getElementById('student_list_button');
+        if(typeof elem !== null && elem !== 'undefined')
+        {
+          document.getElementById('hall-student-list-div').style.display = 'none';
+        }
+      }
+      function loadStudentList()
+      {
+        var elem = document.getElementById('student_list_button');
+        if(typeof elem !== null && elem !== 'undefined')
+        {
+          document.getElementById('hall-student-list-div').style.display = 'block';
+          document.getElementById('hall-news-cover-div').style.display = 'none';
+          document.getElementById('hall-about-cover-div').style.display = 'none';
+          document.getElementById('hall-contacts-cover-div').style.display = 'none';
+          document.getElementById('hall-complaints-cover-div').style.display = 'none';
+          document.getElementById('student_list_button').focus();
+        }
       }
 
       $(document).ready(function()
@@ -103,6 +136,26 @@ $hall_code = $_SESSION['hall_code'];
             loadHallContacts();
           });
         });
+
+        <?php
+          if ($type == 'Warden')
+          {
+        ?>
+        $("#student_list_button").click(function()
+        {
+          var tab = 'slist';
+          $.post("change_tab.php",
+          {
+            tab_name: tab,
+          },
+          function()
+          {
+            loadStudentList();
+          });
+        });
+        <?php
+          }
+         ?>
       });
 
       function upvote_temp(comp_no)
@@ -161,6 +214,17 @@ $hall_code = $_SESSION['hall_code'];
     				<button class="btn btn-link" id="complaints_button">
     					View Complaints
     				</button>
+            <?php
+              if ($type == 'Warden')
+              {
+            ?>
+              <br>
+      				<button class="btn btn-link" id="student_list_button">
+      					Boarder List
+      				</button>
+            <?php
+              }
+            ?>
     				<br>
     				<button class="btn btn-link" id="contacts_button">
     					Useful Contacts
@@ -263,6 +327,125 @@ $hall_code = $_SESSION['hall_code'];
           ?>
     		</div>
 
+      <?php
+        if ($type == 'Warden')
+        {
+      ?>
+        <div id="hall-student-list-div" style="display: none;">
+          <!-- Modal -->
+          <div class="modal fade" id="slist_modal_promote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add to Hall Council</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form id="promote_form" action="promote.php" method="post">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="roll_no">Roll Number</label>
+                      <input type="text" class="form-control" id="promote-roll-no" name="roll_no" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="portfolio">Portfolio</label>
+                      <select class="form-control" id="promote-portfolio" name="portfolio">
+                  	  <option>Hall President</option>
+                      <option>Second Senate Member</option>
+                      <option>G.Sec. Maintenance</option>
+                      <option>G.Sec. Mess</option>
+                      <option>G.Sec. So-Cult</option>
+                      <option>G.Sec. Sports</option>
+                  	  <option>G.Sec. Student Welfare</option>
+                      <option>G.Sec. Technology</option>
+                  	  </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="submit" value="promote">Promote</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="slist_modal_demote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Remove from Hall Council</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form id="demote_form" action="promote.php" method="post">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="roll_no">Roll Number</label>
+                      <input type="text" class="form-control" id="demote-roll-no" name="roll_no" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="portfolio">Portfolio</label>
+                      <input type="text" class="form-control" id="demote-portfolio" name="portfolio" readonly>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    Are you sure you want to continue?
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary" name="submit" value="demote">Yes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <!-- Modal -->
+          <?php
+            require("db_connect.php");
+            $query = "SELECT * from student_data WHERE hall_code = '$hall_code' order by roll_no";
+            $run = mysqli_query($connection, $query);
+            while($result = mysqli_fetch_assoc($run))
+            {
+              $subquery = "SELECT portfolio from hall_council WHERE roll_no = '".$result['roll_no']."'";
+              $subrun = mysqli_query($connection, $subquery);
+              if ($subresult = mysqli_fetch_assoc($subrun))
+              {
+                $student_auth = $subresult['portfolio'];
+                ?>
+                <div>
+                  <?php echo $result['roll_no'].' -- '.$subresult['portfolio']; ?>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_demote"
+                  onclick="document.getElementById('demote-roll-no').value = '<?php echo $result['roll_no']; ?>';
+                  document.getElementById('demote-portfolio').value = '<?php echo $subresult['portfolio']; ?>'">
+          				  Remove
+          				</button>
+                </div>
+                <?php
+              }
+              else
+              {
+                ?>
+                <div>
+                  <?php echo $result['roll_no']; ?>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#slist_modal_promote"
+                  onclick="document.getElementById('promote-roll-no').value = '<?php echo $result['roll_no']; ?>'">
+          				  Add
+          				</button>
+                </div>
+                <?php
+              }
+            }
+            mysqli_free_result($run);
+            mysqli_close($connection);
+          ?>
+        </div>
+      <?php
+        }
+      ?>
+
 
     		<div id="hall-complaints-cover-div" style="display: none;">
     				<?php
@@ -289,7 +472,7 @@ $hall_code = $_SESSION['hall_code'];
     				            <select class="form-control" name="complaint_category">
                           <option>Maintenance</option>
                           <option>Mess</option>
-                          <option>So-Cult</option
+                          <option>So-Cult</option>
                           <option>Sports</option>
                       	  <option>Student Welfare</option>
                           <option>Technology</option>
@@ -324,7 +507,7 @@ $hall_code = $_SESSION['hall_code'];
     				    $run = mysqli_query($connection, $query);
     				    while($result = mysqli_fetch_assoc($run))
     				    {
-                  $subquery = "SELECT name from student_data WHERE roll_no = '$id'";
+                  $subquery = "SELECT name from student_data WHERE roll_no = '".$result['roll_no']."';";
                   $subrun = mysqli_query($connection, $subquery);
                   $subresult = mysqli_fetch_assoc($subrun);
         			?>
@@ -338,9 +521,8 @@ $hall_code = $_SESSION['hall_code'];
                       <h6 class="card-subtitle mb-2 text-muted"><?php echo $result['category']; ?></h6>
                       <p class="card-text"><?php echo $result['content']; ?></p>
                       <button type="button" style="margin-right: 1rem;" class="btn btn-primary" hidden="true">Feedback</a>
-                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)">
-                        <i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?>
-                     </button>
+                      <button type="button" class="btn btn-outline-primary" id="upvote-<?php echo $result['complaint_no']; ?>" onclick="upvote_temp(<?php echo $result['complaint_no']; ?>)"><i class="fa fa-thumbs-up" style="margin-right: 0.5rem;"></i><?php echo $result['no_of_upvotes']; ?></button>
+                    </div>
                     </div>
                   </div>
         			<?php
@@ -465,6 +647,8 @@ $hall_code = $_SESSION['hall_code'];
         echo '<script type="text/javascript">loadHallComplaints();</script>';
       else if ($_SESSION['tab'] == 'contacts')
         echo '<script type="text/javascript">loadHallContacts();</script>';
+      else if ($type == 'Warden' && $_SESSION['tab'] == 'slist')
+        echo '<script type="text/javascript">loadStudentList();</script>';
     ?>
   </body>
 </html>

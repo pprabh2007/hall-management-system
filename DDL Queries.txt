@@ -1,8 +1,8 @@
-#######################################################################
-#								                                      #         
-#	                  DATA DEFINITION LANGUAGE		                  #
-#                                                                     #
-#######################################################################
+############################################
+#                                          #
+#      DATA DEFINITION LANGUAGE	Queries	   #
+#                                          #
+############################################
 
 
 1)
@@ -105,11 +105,11 @@ CREATE TABLE general_news(
 );
 
 
-#######################################################################
-#								                                      #         
-#	                       TRIGGERS		                              #
-#                                                                     #
-#######################################################################
+#######################################################
+#								                                      #
+#	                       TRIGGERS                     #
+#                                                     #
+#######################################################
 
 1)
 CREATE OR REPLACE TRIGGER increment_votes AFTER INSERT ON upvotes
@@ -124,3 +124,17 @@ FOR EACH ROW
 UPDATE complaints
 SET no_of_upvotes=no_of_upvotes-1
 WHERE OLD.complaint_no=complaints.complaint_no;
+
+3)
+CREATE OR REPLACE TRIGGER promote_to_council AFTER INSERT ON hall_council
+FOR EACH ROW
+UPDATE login_credentials
+SET login_category='Hall Council Member'
+WHERE NEW.roll_no=login_credentials.login_id;
+
+4)
+CREATE OR REPLACE TRIGGER demote_from_council AFTER DELETE ON hall_council
+FOR EACH ROW
+UPDATE login_credentials
+SET login_category='Boarder'
+WHERE OLD.roll_no=login_credentials.login_id;
