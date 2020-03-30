@@ -28,7 +28,7 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('news_button').focus();
         var elem = document.getElementById('student_list_button');
-        if(typeof elem !== null && elem !== 'undefined')
+        if(elem != null)
         {
           document.getElementById('hall-student-list-div').style.display = 'none';
         }
@@ -41,23 +41,20 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('about_button').focus();
         var elem = document.getElementById('student_list_button');
-        if(typeof elem !== null && elem !== 'undefined')
+        if(elem != null)
         {
           document.getElementById('hall-student-list-div').style.display = 'none';
         }
       }
       function loadHallComplaints()
       {
-     
-        console.log(document.getElementById('hall-student-list-div'));
-
         document.getElementById('hall-news-cover-div').style.display = 'none';
         document.getElementById('hall-about-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
         document.getElementById('hall-complaints-cover-div').style.display = 'block';
         document.getElementById('complaints_button').focus();
         var elem = document.getElementById('student_list_button');
-        if(typeof elem !== null && elem !== 'undefined')
+        if(elem != null)
         {
           document.getElementById('hall-student-list-div').style.display = 'none';
         }
@@ -70,7 +67,7 @@ $hall_code = $_SESSION['hall_code'];
         document.getElementById('hall-complaints-cover-div').style.display = 'none';
         document.getElementById('contacts_button').focus();
         var elem = document.getElementById('student_list_button');
-        if(typeof elem !== null && elem !== 'undefined')
+        if(elem != null)
         {
           document.getElementById('hall-student-list-div').style.display = 'none';
         }
@@ -78,7 +75,7 @@ $hall_code = $_SESSION['hall_code'];
       function loadStudentList()
       {
         var elem = document.getElementById('student_list_button');
-        if(typeof elem !== null && elem !== 'undefined')
+        if(elem != null)
         {
           document.getElementById('hall-student-list-div').style.display = 'block';
           document.getElementById('hall-news-cover-div').style.display = 'none';
@@ -433,7 +430,7 @@ $hall_code = $_SESSION['hall_code'];
             </tr>
           </thead>
           <tbody>
-            
+
             <?php
             require("db_connect.php");
             $query = "SELECT * from student_data WHERE hall_code = '$hall_code' order by roll_no";
@@ -472,7 +469,7 @@ $hall_code = $_SESSION['hall_code'];
               </td>
                 </tr>
 
-                   
+
                 <?php
               }
             }
@@ -542,11 +539,55 @@ $hall_code = $_SESSION['hall_code'];
     				<?php
     				}
     				?>
+            <div class="card" style="width: 90%; margin-top: 1rem;">
+              <div class="card-header">
+                <form id="disp_setting_form" method="post" action="complaint_setting.php">
+                  <label for="comp_order">Order by:</label>
+                  <select name="comp_order" id="comp_order" onchange="document.getElementById('comp_set_btn').disabled = false;">
+                    <option value="date">Date</option>
+                    <option value="no_of_upvotes">Upvotes</option>
+                  </select>
+                  <label for="comp_type" style="margin-left: 1rem;">Display:</label>
+                  <select name="comp_type" id="comp_type" onchange="document.getElementById('comp_set_btn').disabled = false;">
+                    <option value="all">All</option>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                    <option value="my_comp">Registered by me</option>
+                  </select>
+                  <button type="submit" id="comp_set_btn" class="btn btn-primary" name="submit" style="float: right;" disabled>Apply</button>
+                </form>
+              </div>
+            </div>
     				<div class="accordion container" id="news-accordion">
     				  <?php
     				    require("db_connect.php");
-    				    $query = "SELECT * from complaints WHERE hall_code = '$hall_code' order by no_of_upvotes desc";
-    				    $run = mysqli_query($connection, $query);
+                $query = "SELECT * from complaints WHERE hall_code = '$hall_code' ";
+                if ($_SESSION['comp_type'] == 'open')
+                {
+                  $query = $query . "AND status='open' ";
+                  echo "<script>document.getElementById('comp_type').selectedIndex = '1';</script>";
+                }
+                else if ($_SESSION['comp_type'] == 'closed')
+                {
+                  $query = $query . "AND status='closed' ";
+                  echo "<script>document.getElementById('comp_type').selectedIndex = '2';</script>";
+                }
+                if ($_SESSION['comp_type'] == 'my_comp')
+                {
+                  $query = $query . "AND roll_no='$id' ";
+                  echo "<script>document.getElementById('comp_type').selectedIndex = '3';</script>";
+                }
+
+                if ($_SESSION['comp_order'] == 'no_of_upvotes')
+                {
+    				      $query = $query . "ORDER BY no_of_upvotes desc;";
+                  echo "<script>document.getElementById('comp_order').selectedIndex = '1';</script>";
+                }
+                else
+                {
+                  $query = $query . "ORDER BY date desc;";
+                }
+                $run = mysqli_query($connection, $query);
     				    while($result = mysqli_fetch_assoc($run))
     				    {
                   $subquery = "SELECT name from student_data WHERE roll_no = '".$result['roll_no']."';";
@@ -733,7 +774,7 @@ $hall_code = $_SESSION['hall_code'];
     		</div>
 
     	</div>
-      
+
     </div>
     <?php
       if ($_SESSION['tab'] == 'about')

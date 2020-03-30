@@ -28,6 +28,8 @@
   			$_SESSION['type'] = $_POST['category'];
   			$_SESSION['hall_code'] = $result['hall_code'];
 				$_SESSION['tab'] = 'about';
+				$_SESSION['comp_type'] = 'all';
+				$_SESSION['comp_order'] = 'date';
         mysqli_free_result($run);
   			mysqli_close($connection);
   			header('Location: account_home.php');
