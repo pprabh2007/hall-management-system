@@ -23,21 +23,18 @@
       </div>
     </div>
     <div class="container">
-      <h3> Home </h3>
       <p>
-        IIT-KGP is the 1st IIT and has the largest campus area among all the IITs. The appeal of vast expanses
+        IIT-KGP is the oldest IIT and has the largest campus area among all the IITs. The appeal of vast expanses
         of green, sweeping trees everywhere and the classic architecture blends in with the creative lifestyle
         of young KGPians. Full residential campus away from the hustle-bustle of city life accelerates the
         student life towards social and creative gatherings and develops among them the extra-ordinary skill in
         all the spheres.
       </p>
       <p>
-        IIT-KGP campus plays a major role in students’ academic and social life, making the KGP stay most
-        memorable days of their life and making them ready to shine in the World — what we call as KGPians.
-        One key element of this campus experience is one's 'Hall of Residence'.
+        IIT-KGP campus plays a major role in students’ academic and social life, making the KGP stay most memorable days of their life and making them ready to shine in the World. One key element of this campus experience is one's 'Hall of Residence'.
       </p>
       <p>
-        The institute is fully residential. Students are accommodated in 21 Halls of Residence and the staff is
+        The institute is fully residential. Students are accommodated in 22 Halls of Residence and the staff is
         provided with quarters. Accommodation for visitors is arranged in the Technology Guest House, CEC Guest
         House, Alumni Guest House or CTS Visitors Hall, or if need arises, in students' Hall of Residence.
       </p>
@@ -47,5 +44,10 @@
         the unique 'Hall Culture' of IIT Kharagpur.
       </p>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
   </body>
 </html>

@@ -14,8 +14,8 @@ $hall_code = $_SESSION['hall_code'];
   	<title>Welcome!</title>
   	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="css/custom-styles-account-page.css">
-  	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-styles-account-page.css?v=<?php echo time(); ?>">
+  	<link rel="stylesheet" type="text/css" href="css/custom-styles-home.css?v=<?php echo time(); ?>">
   	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
   	<script type="text/javascript" src="js/bootstrap.js"></script>
   	<script type="text/javascript" src="js/popper.js"></script>
@@ -317,10 +317,13 @@ $hall_code = $_SESSION['hall_code'];
             $run = mysqli_query($connection,$sql);
             if ($result = mysqli_fetch_assoc($run))
             {
-              echo $result['hall_name'];
+              //echo $result['hall_name'];
           ?>
+          <img src="<?php echo $result['image_path']; ?>" >
+          
           <!-- Add Your Code Here -->
           <?php
+              echo $result['description']; 
             }
             mysqli_free_result($run);
             mysqli_close($connection);
