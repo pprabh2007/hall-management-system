@@ -145,3 +145,10 @@ FOR EACH ROW
 UPDATE hall_data
 SET no_of_boarders=no_of_boarders+1
 WHERE NEW.hall_code=hall_data.hall_code;
+
+6)
+CREATE OR REPLACE TRIGGER decrement_boarders AFTER DELETE ON student_data
+FOR EACH ROW
+UPDATE hall_data
+SET no_of_boarders=no_of_boarders-1
+WHERE OLD.hall_code=hall_data.hall_code;
