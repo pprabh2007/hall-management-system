@@ -9,7 +9,7 @@ $hall_code = $_SESSION['hall_code'];
 
 ?>
 <!DOCTYPE html>
-<html style="height: 100%">
+<html>
   <head>
   	<title>Welcome!</title>
   	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -48,6 +48,9 @@ $hall_code = $_SESSION['hall_code'];
       }
       function loadHallComplaints()
       {
+     
+        console.log(document.getElementById('hall-student-list-div'));
+
         document.getElementById('hall-news-cover-div').style.display = 'none';
         document.getElementById('hall-about-cover-div').style.display = 'none';
         document.getElementById('hall-contacts-cover-div').style.display = 'none';
@@ -210,7 +213,7 @@ $hall_code = $_SESSION['hall_code'];
     </script>
   </head>
 
-  <body style="height: 100%">
+  <body>
     <?php include('navbar.php'); ?>
     <div class="row" style="height: 100%" id="main-div">
     	<div class="col-lg-2 col-sm-3 justify-content-center" >
@@ -550,6 +553,7 @@ $hall_code = $_SESSION['hall_code'];
                   $subrun = mysqli_query($connection, $subquery);
                   $subresult = mysqli_fetch_assoc($subrun);
         			?>
+                  <br>
           				<div class="card" style="width: 90%;">
                     <div class="card-header">
                       <span style="float: left;"><?php echo $subresult['name']; ?></span>
@@ -729,6 +733,7 @@ $hall_code = $_SESSION['hall_code'];
     		</div>
 
     	</div>
+      
     </div>
     <?php
       if ($_SESSION['tab'] == 'about')
@@ -742,5 +747,6 @@ $hall_code = $_SESSION['hall_code'];
       else if ($type == 'Warden' && $_SESSION['tab'] == 'slist')
         echo '<script type="text/javascript">loadStudentList();</script>';
     ?>
+
   </body>
 </html>
