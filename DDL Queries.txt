@@ -138,3 +138,10 @@ FOR EACH ROW
 UPDATE login_credentials
 SET login_category='Boarder'
 WHERE OLD.roll_no=login_credentials.login_id;
+
+5)
+CREATE OR REPLACE TRIGGER increment_boarders AFTER INSERT ON student_data
+FOR EACH ROW
+UPDATE hall_data
+SET no_of_boarders=no_of_boarders+1
+WHERE NEW.hall_code=hall_data.hall_code;
