@@ -541,20 +541,23 @@ $hall_code = $_SESSION['hall_code'];
     				?>
             <div class="card" style="width: 90%; margin-top: 1rem;">
               <div class="card-header">
-                <form id="disp_setting_form" method="post" action="complaint_setting.php">
-                  <label for="comp_order">Order by:</label>
-                  <select name="comp_order" id="comp_order" onchange="document.getElementById('comp_set_btn').disabled = false;">
-                    <option value="date">Date</option>
-                    <option value="no_of_upvotes">Upvotes</option>
-                  </select>
-                  <label for="comp_type" style="margin-left: 1rem;">Display:</label>
-                  <select name="comp_type" id="comp_type" onchange="document.getElementById('comp_set_btn').disabled = false;">
-                    <option value="all">All</option>
-                    <option value="open">Open</option>
-                    <option value="closed">Closed</option>
-                    <option value="my_comp">Registered by me</option>
-                  </select>
-                  <button type="submit" id="comp_set_btn" class="btn btn-primary" name="submit" style="float: right;" disabled>Apply</button>
+                <form id="disp_setting_form" method="post" action="complaint_setting.php" class="form-inline">
+       
+                    <label class="my-1 mr-2" for="comp_order">Order by:</label>
+                    <select class="custom-select my-1 mr-sm-2" name="comp_order" id="comp_order" onchange="document.getElementById('comp_set_btn').disabled = false;">
+                      <option value="date">Date</option>
+                      <option value="no_of_upvotes">Upvotes</option>
+                    </select>
+                
+                 
+                    <label class="my-1 mr-2" for="comp_type" style="margin-left: 1rem;">Display:</label>
+                    <select class="custom-select my-1 mr-sm-2" name="comp_type" id="comp_type" onchange="document.getElementById('comp_set_btn').disabled = false;">
+                      <option value="all">All</option>
+                      <option value="open">Open</option>
+                      <option value="closed">Closed</option>
+                      <option value="my_comp">Registered by me</option>
+                    </select>
+                    <button type="submit" id="comp_set_btn" class="btn btn-primary" name="submit" style="float: right;" disabled>Apply</button>
                 </form>
               </div>
             </div>
@@ -594,7 +597,7 @@ $hall_code = $_SESSION['hall_code'];
                   $subrun = mysqli_query($connection, $subquery);
                   $subresult = mysqli_fetch_assoc($subrun);
         			?>
-                  <br>
+
           				<div class="card" style="width: 90%;">
                     <div class="card-header">
                       <span style="float: left;"><?php echo $subresult['name']; ?></span>

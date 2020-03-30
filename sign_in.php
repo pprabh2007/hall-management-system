@@ -2,7 +2,7 @@
 	if(isset($_POST['submit']) && !empty($_POST['id']) && !empty($_POST['password']))
 	{
 		require('db_connect.php');
-		$sql = 'SELECT * FROM login_credentials WHERE login_id="'.$_POST['id'].'" AND login_category="'.$_POST['category'].'";';
+		$sql = 'SELECT * FROM login_credentials WHERE login_id="'.$_POST['id'].'"';
     if(!($run = mysqli_query($connection,$sql)))
     {
       echo 'query error: '.mysqli_error($connection);
@@ -13,7 +13,8 @@
     {
       if (password_verify($_POST['password'], $result['login_password']))
       {
-        if ($_POST['category'] == 'Warden')
+        $category = $result['login_category'];
+        if ($category == 'Warden')
   			{
   				$sql = 'SELECT hall_code from hall_authorities WHERE employee_id = "'.$_POST['id'].'";';
   			}
@@ -25,7 +26,7 @@
   			$result = mysqli_fetch_assoc($run);
   			session_start();
   			$_SESSION['id'] = $_POST['id'];
-  			$_SESSION['type'] = $_POST['category'];
+  			$_SESSION['type'] = $category;
   			$_SESSION['hall_code'] = $result['hall_code'];
 				$_SESSION['tab'] = 'about';
 				$_SESSION['comp_type'] = 'all';
@@ -69,14 +70,7 @@
         	<label for="id">Roll Number or Employee ID</label>
         	<input type="text" class="form-control" id="id" name="id" required="required">
         </div>
-        <div class="form-group">
-      	  <label for="category">Category</label>
-      	  <select class="form-control" id="category" name="category">
-        	  <option>Boarder</option>
-        	  <option>Hall Council Member</option>
-        	  <option>Warden</option>
-      	  </select>
-        </div>
+        
       	<div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" name="password" required="required">

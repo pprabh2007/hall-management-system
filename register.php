@@ -256,7 +256,6 @@
       	  <label for="reg-category">Category</label>
       	  <select class="form-control" id="reg-category" name="reg-category" onchange="getOptions()" >
       	  <option>Boarder</option>
-      	  <option>Hall Council Member</option>
       	  <option>Warden</option>
       	  </select>
         </div>

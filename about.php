@@ -26,13 +26,38 @@
       <p>
         This application was developed as a part of the term project for the <i>'Database Management Systems'</i>
         course by:
-        <ul>
-          <li>Soumen Dutta</li>
-          <li>Rajdeep Mondal</li>
-          <li>Sahil Singh</li>
-          <li>Prabhpreet Singh Sodhi</li>
-        </ul>
       </p>
+      <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Roll Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                  <th scope="row">1</th>
+                  <td>Soumen Dutta</td>
+                  <td>17CS10057</td>
+            </tr>
+            <tr>
+                  <th scope="row">2</th>
+                  <td>Sahil Singh</td>
+                  <td>17CS10047</td>
+            </tr>
+            <tr>
+                  <th scope="row">3</th>
+                  <td>Rajdeep Mondal</td>
+                  <td>17CS10041</td>
+            </tr>
+            <tr>
+                  <th scope="row">4</th>
+                  <td>Prabhpreet Singh Sodhi</td>
+                  <td>17CS10035</td>
+            </tr>
+          </tbody>
+      </table>
     </div>
 
     <br>
