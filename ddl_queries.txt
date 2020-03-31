@@ -1,6 +1,6 @@
 ############################################
 #                                          #
-#      DATA DEFINITION LANGUAGE	Queries	   #
+#      DATA DEFINITION LANGUAGE	QUERIES	   #
 #                                          #
 ############################################
 
@@ -11,7 +11,7 @@ CREATE TABLE hall_data(
 	hall_name VARCHAR(100),
 	description TEXT,
 	image_path VARCHAR(20),
-	no_of_boarders INT
+	no_of_boarders INT DEFAULT 0
 );
 
 2)
@@ -21,7 +21,7 @@ CREATE TABLE student_data(
 	branch_code VARCHAR(2),
 	date_of_birth DATE,
 	email_id VARCHAR(100),
-	hall_code VARCHAR(3)
+	hall_code VARCHAR(3),
 	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
 );
 
@@ -83,6 +83,7 @@ CREATE TABLE complaints(
 	roll_no VARCHAR(10),
 	hall_code VARCHAR(3),
 	no_of_upvotes INT DEFAULT 0,
+	status VARCHAR(10) DEFAULT 'open',
 	FOREIGN KEY(roll_no) REFERENCES student_data(roll_no) ON DELETE CASCADE,
 	FOREIGN KEY(hall_code) REFERENCES hall_data(hall_code) ON DELETE CASCADE
 );

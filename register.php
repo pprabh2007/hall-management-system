@@ -36,25 +36,6 @@
 					echo 'query error: '.mysqli_error($connection);
 				}
 			}
-			else if($_POST['reg-category']==='Hall Council Member')
-			{
-				$dob=$_POST['reg-dob'];
-				$dept=$_POST['reg-branch'];
-				$post=$_POST['reg-portfolio'];
-				$sql="INSERT INTO student_data(roll_no,name,branch_code,date_of_birth,email_id,hall_code) VALUES('$login_id','$name','$dept','$dob','$email','$hall')";
-
-				if(!mysqli_query($connection,$sql))
-				{
-					echo 'query error: '.mysqli_error($connection);
-				}
-
-				$sql="INSERT INTO hall_council(roll_no,portfolio,hall_code) VALUES('$login_id','$post','$hall')";
-
-				if(!mysqli_query($connection,$sql))
-				{
-					echo 'query error: '.mysqli_error($connection);
-				}
-			}
 
 			$i = 0;
 			while(isset($_POST[strval($i)]))
@@ -107,7 +88,6 @@
   			var cat = document.getElementById('reg-category').value;
   			if(cat=='Boarder')
   			{
-  				document.getElementById('reg-portfolio-div').style.display = 'none';
   				document.getElementById('reg-position-div').style.display = 'none';
   				document.getElementById('reg-doa-div').style.display = 'none';
   				document.getElementById('reg-branch-div').style.display = 'block';
@@ -115,20 +95,11 @@
   			}
   			else if(cat=='Warden')
   			{
-  				document.getElementById('reg-portfolio-div').style.display = 'none';
   				document.getElementById('reg-branch-div').style.display = 'none';
   				document.getElementById('reg-dob-div').style.display = 'none';
   				document.getElementById('reg-position-div').style.display = 'block';
   				document.getElementById('reg-doa-div').style.display = 'block';
   				document.getElementById("reg-doa").setAttribute("max", today);
-  			}
-  			else
-  			{
-  				document.getElementById('reg-position-div').style.display = 'none';
-  				document.getElementById('reg-doa-div').style.display = 'none';
-  				document.getElementById('reg-portfolio-div').style.display = 'block';
-  				document.getElementById('reg-branch-div').style.display = 'block';
-  				document.getElementById('reg-dob-div').style.display = 'block';
   			}
   		}
   		function val_change()
@@ -259,21 +230,7 @@
       	  <option>Warden</option>
       	  </select>
         </div>
-      	<!-- HCM -->
-        <div class="form-group" id="reg-portfolio-div" style="display: none">
-      	  <label for="reg-portfolio">Portfolio</label>
-      	  <select class="form-control" id="reg-portfolio" name="reg-portfolio">
-      	  <option>Hall President</option>
-          <option>Second Senate Member</option>
-          <option>G.Sec. Maintenance</option>
-          <option>G.Sec. Mess</option>
-          <option>G.Sec. So-Cult</option>
-          <option>G.Sec. Sports</option>
-      	  <option>G.Sec. Student Welfare</option>
-          <option>G.Sec. Technology</option>
-      	  </select>
-        </div>
-      	<!-- Border and HCM -->
+      	<!-- Border -->
         <div class="form-group" id="reg-dob-div">
           <label for="reg-dob">Date of Birth</label>
           <input type="date" class="form-control" id="reg-dob" name="reg-dob" min="1990-01-01" max="2010-12-31" value="1990-01-01">
